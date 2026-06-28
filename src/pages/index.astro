@@ -1,4 +1,5 @@
 ---
+import { MainCanvas } from "@/components/animations/logo/main-canvas";
 import Layout from "@/components/layouts/layout.astro";
 import Profile from "@/components/main/profile.astro";
 import Sandbox from "@/components/main/sandbox.astro";
@@ -8,6 +9,7 @@ import Separator from "@/components/separator.astro";
 ---
 
 <Layout>
+  <MainCanvas client:load />
   <Profile />
   <Separator />
   <Skills />
