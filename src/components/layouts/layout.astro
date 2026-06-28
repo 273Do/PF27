@@ -1,7 +1,10 @@
 ---
 import { ClientRouter } from "astro:transitions";
+import { Font } from "astro:assets";
 
 import "../../styles/global.css";
+import Separator from "../separator.astro";
+import Footer from "./footer.astro";
 ---
 
 <html lang="en">
@@ -12,9 +15,14 @@ import "../../styles/global.css";
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Astro</title>
+    <Font cssVariable="--font-zen-old-mincho" preload />
     <ClientRouter />
   </head>
-  <body>
-    <slot />
+  <body class="my-25 flex w-full justify-center font-serif">
+    <div class="mx-4 w-2xl">
+      <slot />
+      <Separator />
+      <Footer />
+    </div>
   </body>
 </html>

@@ -1,1 +1,24 @@
 @import "tailwindcss";
+
+:root {
+  --background: oklch(0.972 0.002 107);
+  --foreground: oklch(0.222 0.004 81);
+  --primary: oklch(0.222 0.004 81);
+  --primary-foreground: oklch(0.972 0.002 107);
+  --secondary: oklch(0.945 0.002 107);
+  --secondary-foreground: oklch(0.222 0.004 81);
+  --muted: oklch(0.945 0.002 107);
+  --muted-foreground: oklch(0.65 0.004 81);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-serif: var(--font-zen-old-mincho);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+}

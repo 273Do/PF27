@@ -1,0 +1,41 @@
+---
+import Label from "../label.astro";
+
+type WorkObj = {
+  date: string;
+  name: string;
+  tags: string[];
+};
+
+const works: WorkObj[] = [
+  { date: "260601", name: "Canvas Flow", tags: ["Tool", "Creative"] },
+  { date: "0515", name: "Type Grid", tags: ["App", "Design"] },
+  { date: "0428", name: "Midi Map", tags: ["Tool", "Music"] },
+  { date: "0410", name: "Sensor Viz", tags: ["App", "Sensor"] },
+  { date: "0322", name: "Wave Form", tags: ["Tool", "Audio"] },
+  { date: "0305", name: "Palette Gen", tags: ["App", "Design"] },
+  { date: "0218", name: "Log Viewer", tags: ["Tool", "DevOps"] },
+  { date: "0130", name: "Font Lab", tags: ["App", "Design"] },
+  { date: "0115", name: "Mesh Grid", tags: ["Tool", "Creative"] },
+  { date: "251228", name: "Noise Gen", tags: ["App", "Creative"] },
+  { date: "1210", name: "Dark Room", tags: ["Tool", "Photo"] },
+  { date: "1120", name: "Seq Step", tags: ["App", "Music"] },
+];
+---
+
+<div class="mt-6 flex flex-col gap-2">
+  <Label>Works</Label>
+  <div class="group space-y-2 text-muted-foreground">
+    {
+      works.map((work) => (
+        <div class="flex cursor-pointer items-center gap-2 transition-opacity group-hover:opacity-30 hover:opacity-100!">
+          <div class="flex w-full items-center justify-between">
+            <p class="text-primary">{work.name}</p>
+            <p>{work.tags.join(", ")}</p>
+          </div>
+          <p class="w-14 shrink-0">{work.date}</p>
+        </div>
+      ))
+    }
+  </div>
+</div>

@@ -1,9 +1,18 @@
 ---
-import Layout from "../components/layouts/layout.astro";
+import { MainCanvas } from "@/components/animations/logo/main-canvas";
+import Layout from "@/components/layouts/layout.astro";
+import Profile from "@/components/main/profile.astro";
+import Sandbox from "@/components/main/sandbox.astro";
+import Skills from "@/components/main/skills.astro";
+import Works from "@/components/main/works.astro";
+import Separator from "@/components/separator.astro";
 ---
 
 <Layout>
-  <div class="block sm:flex w-full justify-between">
-    <h1>Astro</h1>
-  </div>
+  <MainCanvas client:load />
+  <Profile />
+  <Separator />
+  <Skills />
+  <Works />
+  <Sandbox />
 </Layout>
