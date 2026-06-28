@@ -2,6 +2,8 @@
 import { Image } from "astro:assets";
 
 import myImg from "@/assets/imgs/me.png";
+
+import Label from "../label.astro";
 ---
 
 <div class="flex flex-col gap-4">
@@ -14,7 +16,7 @@ import myImg from "@/assets/imgs/me.png";
       class="z-10 rounded-full"
     />
     <div>
-      <p class="w-fit bg-primary text-white leading-tight">273*</p>
+      <Label>273*</Label>
       <p class="text-muted-foreground">
         Develop, Graphic Design, Sensor Analysis, Experimental Creative, Piano
       </p>

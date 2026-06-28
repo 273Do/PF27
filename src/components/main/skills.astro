@@ -1,4 +1,6 @@
 ---
+import Label from "../label.astro";
+
 const skills: string[] = [
   "Language",
   "Frontend",
@@ -9,8 +11,8 @@ const skills: string[] = [
 ];
 ---
 
-<div class="flex flex-col gap-1">
-  <p class="w-fit bg-primary leading-tight text-white">273*</p>
+<div class="flex flex-col">
+  <Label>Skills</Label>
   <p class="text-muted-foreground">
     {
       skills.map((skill, i) => (
