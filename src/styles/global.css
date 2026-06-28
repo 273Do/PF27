@@ -8,7 +8,7 @@
   --secondary: oklch(0.945 0.002 107);
   --secondary-foreground: oklch(0.222 0.004 81);
   --muted: oklch(0.945 0.002 107);
-  --muted-foreground: oklch(0.556 0.004 81);
+  --muted-foreground: oklch(0.65 0.004 81);
 }
 
 @theme inline {
