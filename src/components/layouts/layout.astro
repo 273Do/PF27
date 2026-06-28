@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
+import { Font } from "astro:assets";
 
 import "../../styles/global.css";
 ---
@@ -12,10 +13,11 @@ import "../../styles/global.css";
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Astro</title>
+    <Font cssVariable="--font-zen-old-mincho" preload />
     <ClientRouter />
   </head>
-  <body class="flex w-full justify-center">
-    <div class="w-3xl mt-25">
+  <body class="flex w-full justify-center font-serif">
+    <div class="mt-25 w-3xl">
       <slot />
     </div>
   </body>
