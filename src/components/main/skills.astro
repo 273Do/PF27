@@ -1,0 +1,24 @@
+---
+const skills: string[] = [
+  "Language",
+  "Frontend",
+  "Backend",
+  "DevOps",
+  "Creative",
+  "Piano",
+];
+---
+
+<div class="flex flex-col gap-1">
+  <p class="w-fit bg-primary leading-tight text-white">273*</p>
+  <p class="text-muted-foreground">
+    {
+      skills.map((skill, i) => (
+        <>
+          {i > 0 && ", "}
+          <span class="underline">{skill}</span>
+        </>
+      ))
+    }
+  </p>
+</div>
