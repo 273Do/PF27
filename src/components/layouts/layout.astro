@@ -3,6 +3,8 @@ import { ClientRouter } from "astro:transitions";
 import { Font } from "astro:assets";
 
 import "../../styles/global.css";
+import Separator from "../separator.astro";
+import Footer from "./footer.astro";
 ---
 
 <html lang="en">
@@ -19,6 +21,8 @@ import "../../styles/global.css";
   <body class="flex w-full justify-center font-serif">
     <div class="my-25 w-2xl">
       <slot />
+      <Separator />
+      <Footer />
     </div>
   </body>
 </html>
