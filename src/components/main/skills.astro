@@ -13,14 +13,14 @@ const skills: string[] = [
 
 <div class="mt-6 flex flex-col">
   <Label>Skills</Label>
-  <p class="text-muted-foreground">
+  <div class="flex gap-2 text-muted-foreground">
     {
       skills.map((skill, i) => (
-        <>
-          {i > 0 && ", "}
-          <span class="underline">{skill}</span>
-        </>
+        <div class="flex">
+          <p>{skill}</p>
+          <span>{i < skills.length - 1 && ","}</span>
+        </div>
       ))
     }
-  </p>
+  </div>
 </div>
