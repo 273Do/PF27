@@ -91,7 +91,6 @@ export function Sandbox() {
                   "flex cursor-alias items-center justify-between gap-4 transition-opacity group-hover:opacity-30 hover:opacity-100!",
                 )}
                 onMouseEnter={() => setHoveredIndex(i)}
-                // onMouseLeave={() => setHoveredIndex(null)}
               >
                 <p className="text-primary">{work.name}</p>
                 <p>{work.tags.join(", ")}</p>
