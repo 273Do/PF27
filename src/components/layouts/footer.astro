@@ -8,7 +8,7 @@ const SNS_LINKS: string[] = ["GitHub", "Discord", "X(Twitter)", "Note"];
   <a class="cursor-alias hover:underline" href={`mailto:${MAIL_ADDRESS}`}>
     {MAIL_ADDRESS}
   </a>
-  <div class="flex gap-2 text-muted-foreground">
+  <div class="z-10 flex gap-2 bg-background text-muted-foreground">
     {
       SNS_LINKS.map((name, i) => (
         <div class="flex cursor-alias">
