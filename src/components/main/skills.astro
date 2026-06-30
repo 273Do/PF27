@@ -1,0 +1,71 @@
+---
+import Label from "../label.astro";
+
+const skills = [
+  "Language",
+  "Frontend",
+  "Backend",
+  "DevOps",
+  "Creative",
+  "Piano",
+];
+const skillDetails = [
+  "TypeScript, Python, PHP, GLSL",
+  "React, Next.js, Vue.js, Astro, React Native, Tailwind CSS, R3F, GSAP, p5.js",
+  "FastAPI, Flask, Laravel, MySQL, PostgreSQL, BaaS",
+  "Docker, Github Actions, AWS, Devcontainer, Zed, Claude Code",
+  "Figma, Blender, Affinity, Cavalry",
+  "KORG SV-1",
+];
+---
+
+<div class="mt-6 flex flex-col">
+  <div class="flex items-center justify-between">
+    <Label>Skills</Label>
+    <div class="relative h-5">
+      {
+        skillDetails.map((detail) => (
+          <p
+            data-detail
+            class="absolute right-0 whitespace-nowrap text-muted-foreground opacity-0 transition-opacity duration-300"
+          >
+            {detail}
+          </p>
+        ))
+      }
+    </div>
+  </div>
+  <div class="mt-2 flex gap-2 text-muted-foreground">
+    {
+      skills.map((skill, i) => (
+        <div class="flex">
+          <p
+            data-skill={i}
+            class="cursor-pointer px-0.5 leading-tight transition-all duration-300"
+          >
+            {skill}
+          </p>
+          <p>{i < skills.length - 1 && ","}</p>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  const skillEls = document.querySelectorAll<HTMLElement>("[data-skill]");
+  const detailEls = document.querySelectorAll<HTMLElement>("[data-detail]");
+
+  skillEls.forEach((el, i) => {
+    el.addEventListener("mouseenter", () => {
+      skillEls.forEach((s) => {
+        s.classList.remove("bg-primary", "text-secondary");
+      });
+      detailEls.forEach((d) => d.classList.add("opacity-0"));
+
+      el.classList.remove("opacity-30");
+      el.classList.add("bg-primary", "text-secondary");
+      detailEls[i]?.classList.remove("opacity-0");
+    });
+  });
+</script>

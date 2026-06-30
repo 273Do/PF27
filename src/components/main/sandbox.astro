@@ -1,0 +1,124 @@
+---
+import Label from "../label.astro";
+
+type WorkObj = {
+  name: string;
+  tags: string[];
+  imageUrl: string;
+};
+
+const works: WorkObj[] = [
+  {
+    imageUrl: "https://picsum.photos/seed/canvas/600/380",
+    name: "Canvas Flow",
+    tags: ["Tool", "Creative"],
+  },
+  {
+    imageUrl: "https://picsum.photos/seed/type/380/520",
+    name: "Type Grid",
+    tags: ["App", "Design"],
+  },
+  {
+    imageUrl: "https://picsum.photos/seed/midi/600/280",
+    name: "Midi Map",
+    tags: ["Tool", "Music"],
+  },
+  {
+    imageUrl: "https://picsum.photos/seed/sensor/440/600",
+    name: "Sensor Viz",
+    tags: ["App", "Sensor"],
+  },
+  {
+    imageUrl: "https://picsum.photos/seed/wave/600/340",
+    name: "Wave Form",
+    tags: ["Tool", "Audio"],
+  },
+  {
+    imageUrl: "https://picsum.photos/seed/palette/360/480",
+    name: "Palette Gen",
+    tags: ["App", "Design"],
+  },
+  {
+    imageUrl: "https://picsum.photos/seed/log/600/420",
+    name: "Log Viewer",
+    tags: ["Tool", "DevOps"],
+  },
+  {
+    imageUrl: "https://picsum.photos/seed/font/420/600",
+    name: "Font Lab",
+    tags: ["App", "Design"],
+  },
+  {
+    imageUrl: "https://picsum.photos/seed/mesh/600/300",
+    name: "Mesh Grid",
+    tags: ["Tool", "Creative"],
+  },
+  {
+    imageUrl: "https://picsum.photos/seed/noise/480/600",
+    name: "Noise Gen",
+    tags: ["App", "Creative"],
+  },
+  {
+    imageUrl: "https://picsum.photos/seed/dark/600/460",
+    name: "Dark Room",
+    tags: ["Tool", "Photo"],
+  },
+  {
+    imageUrl: "https://picsum.photos/seed/seq/320/600",
+    name: "Seq Step",
+    tags: ["App", "Music"],
+  },
+];
+---
+
+<div class="mt-6 flex flex-col gap-2">
+  <div class="flex items-center justify-between">
+    <Label>Sandbox</Label>
+    <p class="text-muted-foreground">
+      Play Ground, R&D Collection, Experiments
+    </p>
+  </div>
+  <div class="flex w-full items-start gap-4">
+    <div class="w-1/2">
+      <div class="w-full space-y-2 text-muted-foreground">
+        {
+          works.map((work, i) => (
+            <div
+              data-row={i}
+              class="flex cursor-alias items-center justify-between gap-4 transition-opacity duration-300"
+            >
+              <p class="text-primary">{work.name}</p>
+              <p>{work.tags.join(", ")}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+    <div class="relative w-1/2">
+      {
+        works.map((work, i) => (
+          <img
+            data-img={i}
+            src={work.imageUrl}
+            alt={work.name}
+            class="absolute inset-0 w-full object-cover opacity-0 transition-opacity duration-300"
+          />
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<script>
+  const rows = document.querySelectorAll<HTMLElement>("[data-row]");
+  const imgs = document.querySelectorAll<HTMLElement>("[data-img]");
+
+  rows.forEach((row, i) => {
+    row.addEventListener("mouseenter", () => {
+      rows.forEach((r) => r.classList.add("opacity-30"));
+      row.classList.remove("opacity-30");
+      imgs.forEach((img) => img.classList.add("opacity-0"));
+      imgs[i]?.classList.remove("opacity-0");
+    });
+  });
+</script>
