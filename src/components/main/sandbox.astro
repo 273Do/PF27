@@ -80,12 +80,12 @@ const works: WorkObj[] = [
   </div>
   <div class="flex w-full items-start gap-4">
     <div class="w-1/2">
-      <div class="w-full space-y-2 text-muted-foreground">
+      <div class="w-full text-muted-foreground">
         {
           works.map((work, i) => (
             <div
               data-row={i}
-              class="flex cursor-alias items-center justify-between gap-4 transition-opacity duration-300"
+              class="flex cursor-alias items-center justify-between py-1 transition-opacity duration-300"
             >
               <p class="text-primary">{work.name}</p>
               <p>{work.tags.join(", ")}</p>
