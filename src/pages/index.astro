@@ -2,7 +2,7 @@
 import { MainCanvas } from "@/components/animations/logo/main-canvas";
 import Layout from "@/components/layouts/layout.astro";
 import Profile from "@/components/main/profile.astro";
-import Sandbox from "@/components/main/sandbox.astro";
+import { Sandbox } from "@/components/main/sandbox";
 import { Skills } from "@/components/main/skills";
 import Works from "@/components/main/works.astro";
 import Separator from "@/components/separator.astro";
@@ -14,5 +14,5 @@ import Separator from "@/components/separator.astro";
   <Separator />
   <Skills client:load />
   <Works />
-  <Sandbox />
+  <Sandbox client:load />
 </Layout>
