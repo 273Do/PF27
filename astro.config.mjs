@@ -15,6 +15,7 @@ export default defineConfig({
       provider: fontProviders.google(),
       name: "Zen Old Mincho",
       cssVariable: "--font-zen-old-mincho",
+      display: "block",
     },
   ],
 });
