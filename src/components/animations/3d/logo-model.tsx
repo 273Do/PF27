@@ -11,7 +11,7 @@ export function LogoModel() {
   const { nodes } = useGLTF(modelPath);
 
   return (
-    <group scale={30} position={[0, 3.5, 0]}>
+    <group scale={50} position={[0, 6, 0]}>
       {Object.entries(nodes)
         .filter(([_, obj]) => obj.type === "Mesh")
         .map(([key, mesh]) => {
