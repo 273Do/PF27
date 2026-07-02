@@ -3,8 +3,12 @@ import type * as THREE from "three";
 import { useGLTF } from "@react-three/drei";
 import { RigidBody, Physics } from "@react-three/rapier";
 
+import modelPath from "@/assets/models/logo.glb";
+
+useGLTF.preload(modelPath);
+
 export function Models() {
-  const { nodes } = useGLTF("models/logo.glb");
+  const { nodes } = useGLTF(modelPath);
 
   return (
     <Physics debug paused>
@@ -13,8 +17,8 @@ export function Models() {
           .filter(([_, obj]) => obj.type === "Mesh")
           .map(([key, mesh]) => {
             return (
-              <RigidBody colliders="hull" ccd friction={1} restitution={0.9}>
-                <mesh key={key} geometry={(mesh as THREE.Mesh).geometry}>
+              <RigidBody key={key} colliders="hull" ccd friction={1} restitution={0.9}>
+                <mesh geometry={(mesh as THREE.Mesh).geometry}>
                   <meshNormalMaterial />
                 </mesh>
               </RigidBody>

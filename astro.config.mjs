@@ -8,6 +8,7 @@ export default defineConfig({
   integrations: [react()],
   vite: {
     plugins: [tailwindcss()],
+    assetsInclude: ["**/*.glb"],
   },
 
   fonts: [
