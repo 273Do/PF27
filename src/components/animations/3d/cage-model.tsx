@@ -3,7 +3,7 @@ import { useRef, type ComponentRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { CuboidCollider, RigidBody } from "@react-three/rapier";
 
-import { useWindowTracker } from "@/hooks/use-wondow-tracker";
+import { useWindowTracker } from "@/hooks/use-window-tracker";
 
 const FLOOR_X = 5.35;
 const FLOOR_Z = 2.85;
@@ -19,11 +19,13 @@ export function CageModel() {
   const pos = useRef({ x: 0, z: 0 });
 
   useFrame(() => {
-    console.log(windowState?.didShake);
     if (!ref.current || !windowState?.acceleration) return;
+
     const { x, y } = windowState.acceleration;
+
     pos.current.x += x / 100000;
     pos.current.z += y / 100000;
+
     ref.current.setNextKinematicTranslation({ x: pos.current.x, y: 0, z: pos.current.z });
   });
 

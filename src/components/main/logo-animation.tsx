@@ -11,10 +11,10 @@ export function LogoAnimation() {
   return (
     <div className="my-4 h-72 w-full border-[0.1px] border-dashed">
       <Canvas camera={{ position: [0, 5, 0], up: [0, 0, -1], fov: 50 }}>
-        <gridHelper />
+        {/*<gridHelper />*/}
         <OrbitControls />
         <Suspense>
-          <Physics debug>
+          <Physics>
             <LogoModel />
             <CageModel />
           </Physics>
