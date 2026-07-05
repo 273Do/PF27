@@ -16,7 +16,7 @@ export function LogoModel() {
         .filter(([_, obj]) => obj.type === "Mesh")
         .map(([key, mesh]) => {
           return (
-            <RigidBody key={key} colliders="hull" ccd friction={1} restitution={0.9}>
+            <RigidBody key={key} colliders="hull" ccd friction={1} restitution={0.1}>
               <mesh geometry={(mesh as THREE.Mesh).geometry}>
                 <meshNormalMaterial />
               </mesh>
