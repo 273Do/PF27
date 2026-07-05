@@ -10,7 +10,7 @@ const FLOOR_Z = 2.85;
 const FLOOR_Y = 1;
 const WALL_H = 5;
 const WALL_T = 1.0;
-const WALL_Y = FLOOR_Y + WALL_H;
+const WALL_Y = -FLOOR_Y + WALL_H;
 
 export function CageModel() {
   const windowState = useWindowTracker();
@@ -30,10 +30,16 @@ export function CageModel() {
   });
 
   return (
-    <RigidBody ref={ref} type="kinematicPosition">
+    <RigidBody ref={ref} type="kinematicPosition" colliders="cuboid">
       {/* 床 */}
       <CuboidCollider
         position={[0, 0, 0]}
+        args={[FLOOR_X * 1.25, FLOOR_Y, FLOOR_Z * 1.25]}
+        restitution={0.1}
+      />
+      {/*　天井　*/}
+      <CuboidCollider
+        position={[0, WALL_H * 2, 0]}
         args={[FLOOR_X * 1.25, FLOOR_Y, FLOOR_Z * 1.25]}
         restitution={0.1}
       />

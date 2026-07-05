@@ -5,6 +5,8 @@ import { RigidBody } from "@react-three/rapier";
 
 import modelPath from "@/assets/models/logo.glb";
 
+import { LogoMaterial } from "./logo-material";
+
 useGLTF.preload(modelPath);
 
 export function LogoModel() {
@@ -18,7 +20,7 @@ export function LogoModel() {
           return (
             <RigidBody key={key} colliders="hull" ccd friction={1} restitution={0.1}>
               <mesh geometry={(mesh as THREE.Mesh).geometry}>
-                <meshNormalMaterial />
+                <LogoMaterial />
               </mesh>
             </RigidBody>
           );
