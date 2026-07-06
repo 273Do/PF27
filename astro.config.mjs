@@ -7,7 +7,18 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   integrations: [react()],
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+      {
+        name: "glsl-frag-loader",
+        transform(code, id) {
+          if (id.endsWith(".frag")) {
+            return `export default ${JSON.stringify(code)}`;
+          }
+        },
+      },
+    ],
+    assetsInclude: ["**/*.glb"],
   },
 
   fonts: [
@@ -15,6 +26,7 @@ export default defineConfig({
       provider: fontProviders.google(),
       name: "Zen Old Mincho",
       cssVariable: "--font-zen-old-mincho",
+      display: "block",
     },
   ],
 });

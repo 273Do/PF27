@@ -10,10 +10,10 @@ const skills = [
   "Piano",
 ];
 const skillDetails = [
-  "TypeScript, Python, PHP, GLSL",
+  "TypeScript, Python, PHP, GO, GLSL",
   "React, Next.js, Vue.js, Astro, React Native, Tailwind CSS, R3F, GSAP, p5.js",
   "FastAPI, Flask, Laravel, MySQL, PostgreSQL, BaaS",
-  "Docker, Github Actions, AWS, Devcontainer, Zed, Claude Code",
+  "Docker, Github Actions, AWS, Devcontainer, Claude Code, Ollama",
   "Figma, Blender, Affinity, Cavalry",
   "KORG SV-1",
 ];
@@ -22,7 +22,7 @@ const skillDetails = [
 <div class="mt-6 flex flex-col">
   <div class="flex items-center justify-between">
     <Label>Skills</Label>
-    <div class="relative h-5">
+    <div class="relative h-6">
       {
         skillDetails.map((detail) => (
           <p
@@ -38,7 +38,7 @@ const skillDetails = [
   <div class="mt-2 flex gap-2 text-muted-foreground">
     {
       skills.map((skill, i) => (
-        <div class="flex">
+        <div class="flex items-center">
           <p
             data-skill={i}
             class="cursor-pointer px-0.5 leading-tight transition-all duration-300"
