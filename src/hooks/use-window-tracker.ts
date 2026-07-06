@@ -8,7 +8,7 @@ export const useWindowTracker = (): TrackerState => {
   const [state, setState] = useState<TrackerState>(null);
 
   useEffect(() => {
-    const tracker = createWindowTracker();
+    const tracker = createWindowTracker({ historyLength: 0 });
     let rafId: number;
 
     const loop = () => {
