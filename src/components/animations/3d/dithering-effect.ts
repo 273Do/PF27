@@ -5,7 +5,7 @@ import { DITHER_DEFAULT_OPTIONS } from "@/constants/3d";
 
 import ditheringShader from "./dithering.frag";
 
-export type DitheringEffectOptions = {
+type DitheringEffectOptions = {
   time?: number;
   resolution?: THREE.Vector2;
   gridSize?: number;
