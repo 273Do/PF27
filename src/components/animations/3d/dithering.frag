@@ -1,10 +1,11 @@
+// 参考：https://github.com/niccolofanton/dithering-shader
+
 uniform float ditheringEnabled;
 uniform vec2 resolution;
 uniform float gridSize;
 uniform float luminanceMethod;
 uniform float invertColor;
 uniform float pixelSizeRatio;
-uniform float grayscaleOnly;
 uniform vec3 foregroundColor;
 uniform vec3 backgroundColor;
 
@@ -20,13 +21,12 @@ bool getValue(float brightness, vec2 pos) {
   if (brightness > 16.0 / 17.0) return false;
   if (brightness < 1.0 / 17.0) return true;
 
-  // Calculate position in 4x4 dither matrix
+  // 4x4 Ditherマトリックス内の位置を計算する
   vec2 pixel = floor(mod(pos.xy / gridSize, 4.0));
   int x = int(pixel.x);
   int y = int(pixel.y);
 
-  // 4x4 Bayer matrix threshold map
-  // Efficiently determine the threshold based on x,y position
+  // 4x4 ベイヤー行列の閾値マップ
   if (x == 0) {
     if (y == 0) return brightness < 16.0 / 17.0;
     if (y == 1) return brightness < 5.0 / 17.0;
@@ -57,36 +57,25 @@ void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor)
   vec2 fragCoord = uv * resolution;
   vec3 baseColor;
 
-  // Apply pixelation effect based on grid size and ratio
+  // グリッドサイズと比率に基づいて、ピクセル化
   float pixelSize = gridSize * pixelSizeRatio;
   vec2 pixelatedUV = floor(fragCoord / pixelSize) * pixelSize / resolution;
   baseColor = texture2D(inputBuffer, pixelatedUV).rgb;
 
-  // Calculate luminance for each pixel (original implementation)
+  // 輝度計算
   float luminance = dot(baseColor, vec3(1., 1., 1.));
 
-  // Apply grayscale if enabled
-  if (grayscaleOnly > 0.0) {
-    baseColor = vec3(luminance);
-  }
-
-  // Apply dither pattern based on pixel position and luminance
+  // Dither 判定
   bool dithered = getValue(luminance, fragCoord);
 
-  // Map dither pattern to foreground/background theme colors
+  // Dither パターン割り当て
   vec3 ditherColor = dithered ? foregroundColor : backgroundColor;
 
-  // Apply dither only to the specific pixelated UV coordinate
+  // ピクセルブロック内に統一適用
   vec2 currentPixel = floor(fragCoord / pixelSize);
   vec2 originalPixel = floor(uv * resolution / pixelSize);
+  baseColor = ditherColor;
 
-  baseColor = (currentPixel == originalPixel) ? ditherColor : backgroundColor;
-
-  // Invert color if requested
-  if (invertColor > 0.0) {
-    baseColor = 1.0 - baseColor;
-  }
-
-  // Output final color preserving alpha
+  // 出力
   outputColor = vec4(baseColor, inputColor.a);
 }
