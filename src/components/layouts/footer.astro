@@ -1,21 +1,24 @@
 ---
-const MAIL_ADDRESS: string = "hogehoge@gmail.com";
-
-const SNS_LINKS: string[] = ["GitHub", "Discord", "X(Twitter)", "Note"];
+import { SNS_LINKS, MAIL_ADDRESS } from "@/constants/links";
 ---
 
-<div class="-mt-2 flex justify-between text-muted-foreground">
+<footer class="-mt-2 flex justify-between text-muted-foreground">
   <a class="cursor-alias hover:underline" href={`mailto:${MAIL_ADDRESS}`}>
     {MAIL_ADDRESS}
   </a>
   <div class="z-10 flex gap-2 bg-background text-muted-foreground">
     {
-      SNS_LINKS.map((name, i) => (
-        <div class="flex cursor-alias">
-          <p class="hover:underline">{name}</p>
+      SNS_LINKS.map(({ title, url }, i) => (
+        <a
+          href={url}
+          class="flex cursor-alias hover:underline"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <p class="hover:underline">{title}</p>
           <span>{i < SNS_LINKS.length - 1 && ","}</span>
-        </div>
+        </a>
       ))
     }
   </div>
-</div>
+</footer>
