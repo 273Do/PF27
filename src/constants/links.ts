@@ -13,6 +13,6 @@ export const SNS_LINKS: LinkObj[] = [
   { title: "Discord", url: DISCORD_LINK },
   { title: "X(Twitter)", url: X_LINK },
   { title: "Note", url: NOTE_LINK },
-];
+] as const;
 
 export const MAIL_ADDRESS = import.meta.env.MAIL_ADDRESS;

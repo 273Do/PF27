@@ -3,14 +3,10 @@ import { useRef, type ComponentRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { CuboidCollider, RigidBody } from "@react-three/rapier";
 
+import { CAGE } from "@/constants/3d";
 import { useWindowTracker } from "@/hooks/use-window-tracker";
 
-const FLOOR_X = 5.35;
-const FLOOR_Z = 2.85;
-const FLOOR_Y = 1;
-const WALL_H = 5;
-const WALL_T = 1.0;
-const WALL_Y = -FLOOR_Y + WALL_H;
+const { FLOOR_X, FLOOR_Y, FLOOR_Z, WALL_H, WALL_T, WALL_Y } = CAGE;
 
 export function CageModel() {
   const windowState = useWindowTracker();
