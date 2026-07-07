@@ -1,15 +1,18 @@
 import { Effect } from "postprocessing";
 import * as THREE from "three";
 
+import { DITHER_DEFAULT_OPTIONS } from "@/constants/3d";
+
 import ditheringShader from "./dithering.frag";
 
-export type DitheringEffectOptions = {
+type DitheringEffectOptions = {
   time?: number;
   resolution?: THREE.Vector2;
   gridSize?: number;
   luminanceMethod?: number;
   invertColor?: boolean;
   pixelSizeRatio?: number;
+  grayscaleOnly?: boolean;
   foregroundColor?: string;
   backgroundColor?: string;
 };
@@ -22,16 +25,19 @@ const hexToVec3 = (hex: string): THREE.Vector3 => {
 export class DitheringEffect extends Effect {
   uniforms: Map<string, THREE.Uniform<number | THREE.Vector2 | THREE.Vector3>>;
 
-  constructor({
-    time = 0,
-    resolution = new THREE.Vector2(1, 1),
-    gridSize = 4.0,
-    luminanceMethod = 0,
-    invertColor = false,
-    pixelSizeRatio = 5,
-    foregroundColor = "#1B1A18",
-    backgroundColor = "#F6F6F5",
-  }: DitheringEffectOptions = {}) {
+  constructor(options: DitheringEffectOptions = {}) {
+    const {
+      time,
+      resolution,
+      gridSize,
+      luminanceMethod,
+      invertColor,
+      pixelSizeRatio,
+      grayscaleOnly,
+      foregroundColor,
+      backgroundColor,
+    } = { ...DITHER_DEFAULT_OPTIONS, ...options };
+
     const uniforms = new Map<string, THREE.Uniform<number | THREE.Vector2 | THREE.Vector3>>([
       ["time", new THREE.Uniform(time)],
       ["resolution", new THREE.Uniform(resolution)],
@@ -40,6 +46,7 @@ export class DitheringEffect extends Effect {
       ["invertColor", new THREE.Uniform(invertColor ? 1 : 0)],
       ["ditheringEnabled", new THREE.Uniform(1)],
       ["pixelSizeRatio", new THREE.Uniform(pixelSizeRatio)],
+      ["grayscaleOnly", new THREE.Uniform(grayscaleOnly ? 1 : 0)],
       ["foregroundColor", new THREE.Uniform(hexToVec3(foregroundColor))],
       ["backgroundColor", new THREE.Uniform(hexToVec3(backgroundColor))],
     ]);
