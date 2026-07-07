@@ -64,7 +64,7 @@ const works: WorkObj[] = [
     tags: ["Tool", "Photo"],
   },
   {
-    imageUrl: "https://picsum.photos/seed/seq/320/600",
+    imageUrl: "https://picsum.photos/seed/seq/320/300",
     name: "Seq Step",
     tags: ["App", "Music"],
   },
@@ -78,7 +78,7 @@ const works: WorkObj[] = [
       Play Ground, R&D Collection, Experiments
     </p>
   </div>
-  <div class="flex w-full items-start gap-4">
+  <div data-sandbox class="flex w-full items-start gap-4">
     <div class="w-1/2">
       <div class="w-full text-muted-foreground">
         {
@@ -94,15 +94,24 @@ const works: WorkObj[] = [
         }
       </div>
     </div>
-    <div class="relative w-1/2">
+    <div class="relative w-1/2 invert">
       {
         works.map((work, i) => (
-          <img
+          <div
+            class="absolute inset-0 opacity-0 transition-opacity duration-300"
             data-img={i}
-            src={work.imageUrl}
-            alt={work.name}
-            class="absolute inset-0 w-full object-cover opacity-0 transition-opacity duration-300"
-          />
+          >
+            <img src={work.imageUrl} alt={work.name} class="w-full invert" />
+            <div class="absolute inset-0 transition-opacity duration-300 [[data-sandbox]:hover_&]:opacity-0">
+              <div class="dither-2xl w-full">
+                <img
+                  src={work.imageUrl}
+                  alt={work.name}
+                  class="w-full invert"
+                />
+              </div>
+            </div>
+          </div>
         ))
       }
     </div>
