@@ -3,24 +3,17 @@ import Label from "../label.astro";
 ---
 
 <header>
-  <div class="flex flex-col gap-2">
-    <a href="/" class="w-fit">Back</a>
-    <div class="flex flex-col gap-1">
-      <Label>Service Title Here</Label>
-      <div>
-        <div class="flex items-center justify-between text-muted-foreground">
-          <p>Web, Frontend, WebGL, Animation</p>
-          <p class="w-14 shrink-0">260707</p>
-        </div>
-        <div class="flex items-center justify-between text-muted-foreground">
-          <p>GitHub, Site, Note</p>
-          <p>BR:12, CM:185, MR:10, IS:16, CT:1</p>
-        </div>
+  <div class="flex flex-col">
+    <a href="/" class="w-fit"> &#x2190; Back</a>
+    <div class="flex flex-col justify-between">
+      <div class="my-2 flex items-center justify-between">
+        <Label>Service Title Here</Label>
+        <p class="w-14 shrink-0 text-muted-foreground">260707</p>
       </div>
-      <!-- <div class="flex items-center gap-2 text-muted-foreground">
-          <p>Web, Frontend, WebGL, Animation</p>
-          <p class="w-14 shrink-0">260707</p>
-        </div> -->
+      <div class="flex flex-col items-end text-muted-foreground">
+        <p class="text-muted-foreground">Web, Frontend, WebGL, Animation</p>
+        <p class="cursor-alias">GitHub, Site, Note</p>
+      </div>
     </div>
   </div>
 </header>
