@@ -18,7 +18,7 @@ export default defineConfig({
         },
       },
     ],
-    assetsInclude: ["**/*.glb"],
+    assetsInclude: ["src/assets/**/*.glb", "src/assets/**/*.hdr"],
   },
 
   fonts: [

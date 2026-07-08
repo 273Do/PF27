@@ -1,25 +1,22 @@
-import { useEffect, useState } from "react";
+import { useRef } from "react";
 
-import { createWindowTracker, type MotionStateObj } from "@273do/winertia";
+import { createWindowTracker, type MotionStateObj, type WindowTrackerObj } from "@273do/winertia";
+import { useFrame } from "@react-three/fiber";
 
-type TrackerState = MotionStateObj | null;
+export const useWindowTracker = () => {
+  const trackerRef = useRef<WindowTrackerObj | null>(null);
 
-export const useWindowTracker = (): TrackerState => {
-  const [state, setState] = useState<TrackerState>(null);
+  if (!trackerRef.current) {
+    trackerRef.current = createWindowTracker({ historyLength: 0 });
+  }
 
-  useEffect(() => {
-    const tracker = createWindowTracker({ historyLength: 0 });
-    let rafId: number;
+  const stateRef = useRef<MotionStateObj | null>(null);
 
-    const loop = () => {
-      const result: TrackerState = tracker.update(performance.now(), 4000);
-      if (result) setState(result);
-      rafId = requestAnimationFrame(loop);
-    };
+  useFrame(() => {
+    const result = trackerRef.current!.update(performance.now(), 4000);
 
-    rafId = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(rafId);
-  }, []);
+    if (result) stateRef.current = result;
+  });
 
-  return state;
+  return stateRef;
 };
