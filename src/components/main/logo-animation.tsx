@@ -3,7 +3,6 @@ import { Suspense } from "react";
 import { Environment, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
-import * as THREE from "three";
 
 import background from "@/assets/imgs/empty_warehouse_01_1k.hdr";
 

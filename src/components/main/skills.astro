@@ -53,19 +53,23 @@ const skillDetails = [
 </div>
 
 <script>
-  const skillEls = document.querySelectorAll<HTMLElement>("[data-skill]");
-  const detailEls = document.querySelectorAll<HTMLElement>("[data-detail]");
+  function init() {
+    const skillEls = document.querySelectorAll<HTMLElement>("[data-skill]");
+    const detailEls = document.querySelectorAll<HTMLElement>("[data-detail]");
 
-  skillEls.forEach((el, i) => {
-    el.addEventListener("mouseenter", () => {
-      skillEls.forEach((s) => {
-        s.classList.remove("bg-primary", "text-secondary");
+    skillEls.forEach((el, i) => {
+      el.addEventListener("mouseenter", () => {
+        skillEls.forEach((s) => {
+          s.classList.remove("bg-primary", "text-secondary");
+        });
+        detailEls.forEach((d) => d.classList.add("opacity-0"));
+
+        el.classList.remove("opacity-30");
+        el.classList.add("bg-primary", "text-secondary");
+        detailEls[i]?.classList.remove("opacity-0");
       });
-      detailEls.forEach((d) => d.classList.add("opacity-0"));
-
-      el.classList.remove("opacity-30");
-      el.classList.add("bg-primary", "text-secondary");
-      detailEls[i]?.classList.remove("opacity-0");
     });
-  });
+  }
+
+  document.addEventListener("astro:page-load", init);
 </script>
