@@ -9,15 +9,17 @@ import { useWindowTracker } from "@/hooks/use-window-tracker";
 const { FLOOR_X, FLOOR_Y, FLOOR_Z, WALL_H, WALL_T, WALL_Y } = CAGE;
 
 export function CageModel() {
-  const windowState = useWindowTracker();
+  const trackerStateRef = useWindowTracker();
 
   const ref = useRef<ComponentRef<typeof RigidBody>>(null);
   const pos = useRef({ x: 0, z: 0 });
 
   useFrame(() => {
-    if (!ref.current || !windowState?.acceleration) return;
+    const motion = trackerStateRef.current;
 
-    const { x, y } = windowState.acceleration;
+    if (!ref.current || !motion) return;
+
+    const { x, y } = motion.acceleration;
 
     pos.current.x += x / 100000;
     pos.current.z += y / 100000;
