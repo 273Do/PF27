@@ -4,6 +4,8 @@ import { Environment, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
 
+import background from "@/assets/imgs/empty_warehouse_01_1k.hdr";
+
 import { CageModel } from "../animations/3d/cage-model";
 import { LogoModel } from "../animations/3d/logo-model";
 import { PostProcessing } from "../animations/3d/post-processing";
@@ -24,8 +26,8 @@ export function LogoAnimation() {
           <Physics debug={DEBUG_MODE}>
             <LogoModel />
             <CageModel />
+            <Environment files={background} />
           </Physics>
-          <Environment preset="warehouse" />
           <PostProcessing />
         </Suspense>
       </Canvas>
