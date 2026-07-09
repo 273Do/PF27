@@ -1,0 +1,21 @@
+---
+import Label from "@/components/ui/label.astro";
+const { statusCode } = Astro.props;
+
+type Props = {
+  statusCode: 404 | 500;
+};
+
+const message: Record<number, string> = {
+  404: "Not Found",
+  500: "Server Error",
+};
+---
+
+<div class="flex items-center justify-between">
+  <a href="/" class="w-fit"> &#x2190; Back</a>
+  <div class="flex gap-2">
+    <Label>{statusCode}</Label>
+    <p class="text-muted-foreground">{message[statusCode]}</p>
+  </div>
+</div>
