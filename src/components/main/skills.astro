@@ -1,21 +1,23 @@
 ---
-import Label from "../label.astro";
+import Label from "@/components/ui/label.astro";
 
 const skills = [
-  "Language",
-  "Frontend",
-  "Backend",
-  "DevOps",
-  "Creative",
-  "Piano",
-];
-const skillDetails = [
-  "TypeScript, Python, PHP, GO, GLSL",
-  "React, Next.js, Vue.js, Astro, React Native, Tailwind CSS, R3F, GSAP, p5.js",
-  "FastAPI, Flask, Laravel, MySQL, PostgreSQL, BaaS",
-  "Docker, Github Actions, AWS, Devcontainer, Claude Code, Ollama",
-  "Figma, Blender, Affinity, Cavalry",
-  "KORG SV-1",
+  { name: "Language", detail: "TypeScript, Python, PHP, GO, GLSL" },
+  {
+    name: "Frontend",
+    detail:
+      "React, Next.js, Vue.js, Astro, React Native, Tailwind CSS, R3F, GSAP, p5.js",
+  },
+  {
+    name: "Backend",
+    detail: "FastAPI, Flask, Laravel, MySQL, PostgreSQL, BaaS",
+  },
+  {
+    name: "DevOps",
+    detail: "Docker, Github Actions, AWS, Devcontainer, Claude Code, Ollama",
+  },
+  { name: "Creative", detail: "Figma, Blender, Affinity, Cavalry" },
+  { name: "Piano", detail: "KORG SV-1" },
 ];
 ---
 
@@ -24,12 +26,12 @@ const skillDetails = [
     <Label>Skills</Label>
     <div class="relative h-6">
       {
-        skillDetails.map((detail) => (
+        skills.map((skill) => (
           <p
             data-detail
             class="absolute right-0 whitespace-nowrap text-muted-foreground opacity-0 transition-opacity duration-300"
           >
-            {detail}
+            {skill.detail}
           </p>
         ))
       }
@@ -43,7 +45,7 @@ const skillDetails = [
             data-skill={i}
             class="cursor-pointer px-0.5 leading-tight transition-all duration-300"
           >
-            {skill}
+            {skill.name}
           </p>
           <p>{i < skills.length - 1 && ","}</p>
         </div>
