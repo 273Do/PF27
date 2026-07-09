@@ -119,15 +119,19 @@ const works: WorkObj[] = [
 </div>
 
 <script>
-  const rows = document.querySelectorAll<HTMLElement>("[data-row]");
-  const imgs = document.querySelectorAll<HTMLElement>("[data-img]");
+  function init() {
+    const rows = document.querySelectorAll<HTMLElement>("[data-row]");
+    const imgs = document.querySelectorAll<HTMLElement>("[data-img]");
 
-  rows.forEach((row, i) => {
-    row.addEventListener("mouseenter", () => {
-      rows.forEach((r) => r.classList.add("opacity-30"));
-      row.classList.remove("opacity-30");
-      imgs.forEach((img) => img.classList.add("opacity-0"));
-      imgs[i]?.classList.remove("opacity-0");
+    rows.forEach((row, i) => {
+      row.addEventListener("mouseenter", () => {
+        rows.forEach((r) => r.classList.add("opacity-30"));
+        row.classList.remove("opacity-30");
+        imgs.forEach((img) => img.classList.add("opacity-0"));
+        imgs[i]?.classList.remove("opacity-0");
+      });
     });
-  });
+  }
+
+  document.addEventListener("astro:page-load", init);
 </script>

@@ -1,0 +1,22 @@
+---
+import Label from "../label.astro";
+import IconMarquee from "./icon-marquee.astro";
+---
+
+<header>
+  <div class="flex flex-col gap-3">
+    <a href="/" class="w-fit"> &#x2190; Back</a>
+    <div class="flex flex-col justify-between">
+      <div class="flex items-center justify-between">
+        <Label>Service Title Here</Label>
+        <p class="w-14 shrink-0 text-muted-foreground">260707</p>
+      </div>
+      <div class="flex items-center justify-between text-muted-foreground">
+        <p>Web, Frontend, WebGL, Animation</p>
+        <p class="cursor-alias">GitHub, Site, Note</p>
+      </div>
+      <!-- <marquee>Scroll to see more</marquee> -->
+      <IconMarquee />
+    </div>
+  </div>
+</header>

@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "dither-plugin";
+@import "simple-icons-font/font/simple-icons.min.css";
 
 :root {
   --background: oklch(0.972 0.002 107);
