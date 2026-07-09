@@ -54,6 +54,13 @@ bool getValue(float brightness, vec2 pos) {
 }
 
 void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor) {
+
+  // ジオメトリがないピクセルは透過
+  if (inputColor.a < 0.01) {
+    outputColor = vec4(0.0);
+    return;
+  }
+
   vec2 fragCoord = uv * resolution;
   vec3 baseColor;
 
