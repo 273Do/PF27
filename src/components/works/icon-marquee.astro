@@ -1,14 +1,40 @@
+---
+const icons = [
+  "astro",
+  "typescript",
+  "react",
+  "threedotjs",
+  "webgl",
+  "vite",
+  "claude",
+  "cloudflare",
+  "zedindustries",
+];
+
+const loopCount = 27 / icons.length;
+---
+
 <div
-  class="[mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]"
+  class="mt-2 -mb-2 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]"
 >
-  <marquee>
-    <div class="flex">
-      <p>icon here</p>
-      <p>icon here</p>
-      <p>icon here</p>
-      <p>icon here</p>
-      <p>icon here</p>
-      <p>icon here</p>
-    </div>
-  </marquee>
+  <div
+    class="flex w-max animate-[marquee_15s_linear_infinite] items-center gap-9 text-3xl text-primary"
+  >
+    {
+      Array.from({ length: loopCount }).map(() =>
+        icons.map((icon) => <i class={`si si-${icon}`} />),
+      )
+    }
+  </div>
 </div>
+
+<style>
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+</style>
