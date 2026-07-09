@@ -5,7 +5,7 @@ const NOTE_LINK = import.meta.env.PUBLIC_NOTE_LINK;
 
 type LinkObj = {
   title: string;
-  url: URL;
+  url: string;
 };
 
 export const SNS_LINKS: LinkObj[] = [
