@@ -72,34 +72,43 @@ const works: WorkObj[] = [
 ---
 
 <div class="mt-6 flex flex-col gap-2">
-  <div class="flex items-center justify-between">
+  <div class="items-center justify-between sm:flex">
     <Label>Sandbox</Label>
     <p class="text-muted-foreground">
       Play Ground, R&D Collection, Experiments
     </p>
   </div>
   <div data-sandbox class="flex w-full items-start gap-4">
-    <div class="w-1/2">
+    <div class="w-full sm:w-1/2">
       <div class="w-full text-muted-foreground">
         {
           works.map((work, i) => (
-            <div
-              data-row={i}
-              class="flex cursor-alias items-center justify-between py-1 transition-opacity duration-300"
-            >
-              <p class="text-primary">{work.name}</p>
-              <p>{work.tags.join(", ")}</p>
+            <div>
+              <div
+                data-row={i}
+                class="flex cursor-alias items-center justify-between py-1 transition-opacity duration-300"
+              >
+                <p class="text-primary">{work.name}</p>
+                <p>{work.tags.join(", ")}</p>
+              </div>
+              <div data-img-mobile={i} class="hidden">
+                <img
+                  src={work.imageUrl}
+                  alt={work.name}
+                  class="w-full sm:hidden"
+                />
+              </div>
             </div>
           ))
         }
       </div>
     </div>
-    <div class="relative w-1/2 invert">
+    <div class="relative hidden w-1/2 invert sm:block">
       {
         works.map((work, i) => (
           <div
-            class="absolute inset-0 opacity-0 transition-opacity duration-300"
             data-img={i}
+            class="absolute inset-0 opacity-0 transition-opacity duration-300"
           >
             <img src={work.imageUrl} alt={work.name} class="w-full invert" />
             <div class="absolute inset-0 transition-opacity duration-300 [[data-sandbox]:hover_&]:opacity-0">
@@ -122,13 +131,19 @@ const works: WorkObj[] = [
   function init() {
     const rows = document.querySelectorAll<HTMLElement>("[data-row]");
     const imgs = document.querySelectorAll<HTMLElement>("[data-img]");
+    const imgsMobile =
+      document.querySelectorAll<HTMLElement>("[data-img-mobile]");
 
     rows.forEach((row, i) => {
       row.addEventListener("mouseenter", () => {
         rows.forEach((r) => r.classList.add("opacity-30"));
         row.classList.remove("opacity-30");
+
         imgs.forEach((img) => img.classList.add("opacity-0"));
         imgs[i]?.classList.remove("opacity-0");
+
+        imgsMobile.forEach((img) => img.classList.add("hidden"));
+        imgsMobile[i]?.classList.remove("hidden");
       });
     });
   }

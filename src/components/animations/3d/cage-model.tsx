@@ -1,28 +1,45 @@
-import { useRef, type ComponentRef } from "react";
+import { useRef, type ComponentRef, type RefObject } from "react";
 
 import { useFrame } from "@react-three/fiber";
 import { CuboidCollider, RigidBody } from "@react-three/rapier";
 
 import { CAGE } from "@/constants/3d";
+import type { DeviceMotion } from "@/hooks/use-device-motion";
 import { useWindowTracker } from "@/hooks/use-window-tracker";
 
 const { FLOOR_X, FLOOR_Y, FLOOR_Z, WALL_H, WALL_T, WALL_Y } = CAGE;
 
-export function CageModel() {
+type Props = {
+  deviceMotionRef?: RefObject<DeviceMotion>;
+};
+
+export function CageModel({ deviceMotionRef }: Props) {
   const trackerStateRef = useWindowTracker();
 
   const ref = useRef<ComponentRef<typeof RigidBody>>(null);
   const pos = useRef({ x: 0, z: 0 });
 
   useFrame(() => {
-    const motion = trackerStateRef.current;
+    if (!ref.current) return;
 
-    if (!ref.current || !motion) return;
+    if (deviceMotionRef?.current) {
+      const { x, y } = deviceMotionRef.current;
 
-    const { x, y } = motion.acceleration;
+      // シェイクの強さに応じて押し出し、常に原点へ引き戻す
+      pos.current.x += x / 30;
+      pos.current.z += y / 30;
+      pos.current.x *= 0.9;
+      pos.current.z *= 0.9;
+    } else {
+      const motion = trackerStateRef.current;
 
-    pos.current.x += x / 100000;
-    pos.current.z += y / 100000;
+      if (!motion) return;
+
+      const { x, y } = motion.acceleration;
+
+      pos.current.x += x / 100000;
+      pos.current.z += y / 100000;
+    }
 
     ref.current.setNextKinematicTranslation({ x: pos.current.x, y: 0, z: pos.current.z });
   });
