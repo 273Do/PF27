@@ -1,0 +1,55 @@
+---
+import { SEO } from "astro-seo";
+
+import JsonLd from "@/components/layouts/json-ld.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "@/constants/metadata";
+
+type Props = {
+  title: string;
+};
+
+const { title } = Astro.props;
+
+const siteUrl = Astro.site || import.meta.env.LOCAL_URL;
+const canonicalURL = new URL(Astro.url.pathname, siteUrl);
+// 仮置き画像
+const imageUrl = new URL("imgs/opengraph-image.png", siteUrl).toString();
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+<meta name="generator" content={Astro.generator} />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" href="/favicon.ico" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+<SEO
+  title={title}
+  description={SITE_DESCRIPTION}
+  canonical={canonicalURL.toString()}
+  openGraph={{
+    basic: {
+      title: title,
+      type: "website",
+      image: imageUrl,
+    },
+    optional: {
+      description: SITE_DESCRIPTION,
+      siteName: SITE_TITLE,
+      locale: "ja_JP",
+    },
+    image: {
+      url: imageUrl,
+      alt: title,
+    },
+  }}
+  twitter={{
+    card: "summary_large_image",
+    title: title,
+    description: SITE_DESCRIPTION,
+    image: imageUrl,
+    imageAlt: title,
+  }}
+/>
+<JsonLd type="website" />
+<JsonLd type="person" />

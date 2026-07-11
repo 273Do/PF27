@@ -1,0 +1,47 @@
+---
+import { MAIL_ADDRESS, SNS_LINKS } from "@/constants/links";
+import { SITE_TITLE, SITE_DESCRIPTION } from "@/constants/metadata";
+
+type Props = {
+  type: "website" | "person";
+};
+
+const { type } = Astro.props;
+
+const siteUrl = Astro.site || import.meta.env.LOCAL_URL;
+
+// WebSiteスキーマ
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  url: siteUrl,
+  inLanguage: "ja-JP",
+};
+
+// Personスキーマ
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "273*",
+  url: siteUrl,
+  email: MAIL_ADDRESS,
+  sameAs: SNS_LINKS.filter((link) => link.url).map((link) => link.url),
+  description: SITE_DESCRIPTION,
+};
+
+const getSchema = () => {
+  switch (type) {
+    case "person":
+      return personSchema;
+    case "website":
+    default:
+      return websiteSchema;
+  }
+};
+
+const schema = getSchema();
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

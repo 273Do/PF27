@@ -1,10 +1,11 @@
 ---
 import Label from "@/components/ui/label.astro";
-const { statusCode } = Astro.props;
 
 type Props = {
   statusCode: 404 | 500;
 };
+
+const { statusCode } = Astro.props;
 
 const message: Record<number, string> = {
   404: "Not Found",
