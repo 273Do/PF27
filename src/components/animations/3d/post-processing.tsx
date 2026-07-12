@@ -1,6 +1,6 @@
 import { EffectComposer, wrapEffect } from "@react-three/postprocessing";
 
-import { DitheringEffect } from "./dithering-effect";
+import { DitheringEffect } from "@/lib/dithering-effect";
 
 const Dithering = wrapEffect(DitheringEffect);
 

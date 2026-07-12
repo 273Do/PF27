@@ -2,6 +2,7 @@
 import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
 
+import { AreaDegradationCanvas } from "@/components/main/area-degradation-canvas.tsx";
 import "@/styles/global.css";
 import Separator from "@/components/ui/separator.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "@/constants/metadata";
@@ -27,6 +28,7 @@ const title = `${SITE_TITLE} ${section}`;
   <body
     class="my-25 flex w-full justify-center bg-background font-serif antialiased selection:bg-secondary-foreground selection:text-primary-foreground"
   >
+    <AreaDegradationCanvas client:idle />
     <div class="w-full max-w-2xl px-4 sm:mx-4 sm:w-auto sm:px-0">
       <slot />
       <Separator />

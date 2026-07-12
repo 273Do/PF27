@@ -1,9 +1,8 @@
 import { Effect } from "postprocessing";
 import * as THREE from "three";
 
+import ditheringShader from "@/components/animations/3d/dithering.frag";
 import { DITHER_DEFAULT_OPTIONS } from "@/constants/3d";
-
-import ditheringShader from "./dithering.frag";
 
 type DitheringEffectOptions = {
   time?: number;
