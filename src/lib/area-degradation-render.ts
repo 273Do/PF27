@@ -1,27 +1,12 @@
 import html2canvas from "html2canvas-pro";
 
+import { DEGRADATION_PARAMS } from "@/constants/area-degradation";
+
 export interface GlitchParams {
   downscale: number;
   jpegQuality: number;
   loops: number;
 }
-
-export const PARAMS: GlitchParams & {
-  rectBaseW: number;
-  rectRatioVariance: number;
-  interval: number;
-  maxRects: number;
-  clearTime: number;
-} = {
-  downscale: 0.5,
-  jpegQuality: 0.1,
-  loops: 3,
-  rectBaseW: 200,
-  rectRatioVariance: 0.2,
-  interval: 200,
-  maxRects: 5,
-  clearTime: 3000,
-};
 
 export function makeGlitchAsync(
   sourceCanvas: HTMLCanvasElement,
@@ -29,7 +14,7 @@ export function makeGlitchAsync(
   sy: number,
   sw: number,
   sh: number,
-  params: GlitchParams,
+  _params: GlitchParams,
 ): Promise<HTMLCanvasElement | null> {
   return new Promise((resolve) => {
     const src = document.createElement("canvas");
@@ -42,8 +27,8 @@ export function makeGlitchAsync(
     }
     srcCtx.drawImage(sourceCanvas, sx, sy, sw, sh, 0, 0, sw, sh);
 
-    const dw = Math.max(2, Math.round(sw * params.downscale));
-    const dh = Math.max(2, Math.round(sh * params.downscale));
+    const dw = Math.max(2, Math.round(sw * DEGRADATION_PARAMS.downscale));
+    const dh = Math.max(2, Math.round(sh * DEGRADATION_PARAMS.downscale));
 
     function runLoop(canvas: HTMLCanvasElement, count: number): void {
       if (count <= 0) {
@@ -72,7 +57,7 @@ export function makeGlitchAsync(
       sc.imageSmoothingEnabled = false;
       sc.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, dw, dh);
 
-      const url = small.toDataURL("image/jpeg", params.jpegQuality);
+      const url = small.toDataURL("image/jpeg", DEGRADATION_PARAMS.jpegQuality);
       const img = new Image();
       img.onload = () => {
         const dec = document.createElement("canvas");
@@ -89,7 +74,7 @@ export function makeGlitchAsync(
       img.src = url;
     }
 
-    runLoop(src, params.loops);
+    runLoop(src, DEGRADATION_PARAMS.loops);
   });
 }
 
@@ -124,8 +109,8 @@ export async function createGlitchRect(
 ): Promise<{ canvas: HTMLCanvasElement; x: number; y: number } | null> {
   const W = window.innerWidth;
   const H = window.innerHeight;
-  const baseW = PARAMS.rectBaseW + (Math.random() - 0.5) * 60;
-  const ratioVariance = PARAMS.rectRatioVariance + (Math.random() - 0.5) * 0.15;
+  const baseW = DEGRADATION_PARAMS.rectBaseW + (Math.random() - 0.5) * 60;
+  const ratioVariance = DEGRADATION_PARAMS.rectRatioVariance + (Math.random() - 0.5) * 0.15;
   const variance = 1 + (Math.random() - 0.5) * ratioVariance * 2;
   const rw = Math.round(baseW);
   const rh = Math.round(baseW / ((16 / 9) * variance));
@@ -133,9 +118,9 @@ export async function createGlitchRect(
   const sy = Math.max(0, Math.min(H - rh, Math.round(cy - rh / 2)));
 
   const glitchParams: GlitchParams = {
-    downscale: Math.max(0.01, Math.min(1, jitter(PARAMS.downscale, 0.15))),
-    jpegQuality: Math.max(0.01, Math.min(1, jitter(PARAMS.jpegQuality, 0.05))),
-    loops: PARAMS.loops,
+    downscale: Math.max(0.01, Math.min(1, jitter(DEGRADATION_PARAMS.downscale, 0.15))),
+    jpegQuality: Math.max(0.01, Math.min(1, jitter(DEGRADATION_PARAMS.jpegQuality, 0.05))),
+    loops: DEGRADATION_PARAMS.loops,
   };
   const gc = await makeGlitchAsync(snap, sx, sy, rw, rh, glitchParams);
   if (!gc) return null;

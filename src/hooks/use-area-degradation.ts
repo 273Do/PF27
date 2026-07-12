@@ -1,10 +1,7 @@
 import { useCallback, useEffect, useRef } from "react";
 
-import {
-  PARAMS,
-  captureScene,
-  createGlitchRect,
-} from "../components/animations/area-degration/render";
+import { DEGRADATION_PARAMS } from "@/constants/area-degradation";
+import { captureScene, createGlitchRect } from "@/lib/area-degradation-render";
 
 export function useAreaDegradation(containerRef: React.RefObject<HTMLDivElement | null>) {
   const snapCanvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -34,13 +31,13 @@ export function useAreaDegradation(containerRef: React.RefObject<HTMLDivElement 
 
       container.appendChild(result.canvas);
 
-      while (container.children.length > PARAMS.maxRects) {
+      while (container.children.length > DEGRADATION_PARAMS.maxRects) {
         container.removeChild(container.firstChild!);
       }
 
       setTimeout(() => {
         if (container.contains(result.canvas)) container.removeChild(result.canvas);
-      }, PARAMS.clearTime);
+      }, DEGRADATION_PARAMS.clearTime);
     },
     [capture, containerRef],
   );
@@ -71,7 +68,7 @@ export function useAreaDegradation(containerRef: React.RefObject<HTMLDivElement 
       if (isMovingRef.current) {
         void spawnRect(mouseRef.current.x, mouseRef.current.y);
       }
-    }, PARAMS.interval);
+    }, DEGRADATION_PARAMS.interval);
     return () => clearInterval(id);
   }, [spawnRect]);
 }
