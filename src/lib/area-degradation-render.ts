@@ -139,7 +139,7 @@ export const createGlitchRect = async (
     loops: DEGRADATION_PARAMS.loops,
   };
 
-  const gc = await makeGlitchAsync(snap, sx, sy + 4, rw, rh, glitchParams);
+  const gc = await makeGlitchAsync(snap, sx, sy, rw, rh, glitchParams);
 
   if (!gc) return null;
 
