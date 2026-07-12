@@ -1,4 +1,4 @@
-import html2canvas from "html2canvas-pro";
+import html2canvas from "html2canvas";
 
 import { DEGRADATION_PARAMS } from "@/constants/area-degradation";
 
@@ -103,7 +103,7 @@ export const captureScene = async (ignoreElement: Element | null): Promise<HTMLC
   const W = window.innerWidth;
   const H = window.innerHeight;
 
-  return html2canvas(document.body, {
+  return html2canvas(document.documentElement, {
     backgroundColor: getComputedStyle(document.body).backgroundColor || "#F6F6F5",
     scale: 1,
     width: W,
@@ -112,8 +112,6 @@ export const captureScene = async (ignoreElement: Element | null): Promise<HTMLC
     windowHeight: H,
     x: window.scrollX,
     y: window.scrollY,
-    scrollX: -window.scrollX,
-    scrollY: -window.scrollY,
     logging: false,
     useCORS: true,
     ignoreElements: (el) => el === ignoreElement,
@@ -141,7 +139,7 @@ export const createGlitchRect = async (
     loops: DEGRADATION_PARAMS.loops,
   };
 
-  const gc = await makeGlitchAsync(snap, sx, sy, rw, rh, glitchParams);
+  const gc = await makeGlitchAsync(snap, sx, sy + 4, rw, rh, glitchParams);
 
   if (!gc) return null;
 
