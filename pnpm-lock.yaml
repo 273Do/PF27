@@ -69,9 +69,9 @@ importers:
       dither-plugin:
         specifier: ^1.1.1
         version: 1.1.1
-      html2canvas-pro:
-        specifier: ^2.2.3
-        version: 2.2.3
+      html2canvas:
+        specifier: ^1.4.1
+        version: 1.4.1
       postprocessing:
         specifier: ^6.39.2
         version: 6.39.2(three@0.185.0)
@@ -2484,9 +2484,9 @@ packages:
   html-void-elements@3.0.0:
     resolution: {integrity: sha512-bEqo66MRXsUGxWHV5IP0PUiAWwoEjba4VCzg0LjFJBpchPaTfyfCKTG6bc5F8ucKec3q5y6qOdGyYTSBEvhCrg==}
 
-  html2canvas-pro@2.2.3:
-    resolution: {integrity: sha512-PHW1mo/AU4fxXZu2ONzOcSWDwXi3ul/qMqOlmM0uvfvJqw2/dsWIY1jxUqYutO3RaLHxVC6mLYG6Ewfo3xYvhg==}
-    engines: {node: '>=16.0.0'}
+  html2canvas@1.4.1:
+    resolution: {integrity: sha512-fPU6BHNpsyIhr8yyMpTLLxAbkaK8ArIBcmZIRiBLiDhjeqvXolaEmDGmELFuX9I4xDcaKKcJl+TKZLqruBbmWA==}
+    engines: {node: '>=8.0.0'}
 
   http-cache-semantics@4.2.0:
     resolution: {integrity: sha512-dTxcvPXqPvXBQpq5dUr6mEMJX4oIEFv6bwom3FDwKRDsuIjjJGANqhBuoAn9c1RQJIdAKav33ED65E2ys+87QQ==}
@@ -5792,7 +5792,7 @@ snapshots:
 
   html-void-elements@3.0.0: {}
 
-  html2canvas-pro@2.2.3:
+  html2canvas@1.4.1:
     dependencies:
       css-line-break: 2.1.0
       text-segmentation: 1.0.3
