@@ -1,3 +1,4 @@
+import cloudflare from "@astrojs/cloudflare";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig, fontProviders } from "astro/config";
@@ -10,6 +11,7 @@ const { LOCAL_URL } = loadEnv(process.env.NODE_ENV ?? "production", process.cwd(
 // https://astro.build/config
 export default defineConfig({
   site: process.env.URL || LOCAL_URL,
+  adapter: cloudflare({ cacheOnDemandPages: true, imageCDN: false }),
   integrations: [
     sitemap({
       filter: (page) => !/\/(404|500)(\/|$)/.test(new URL(page).pathname),
