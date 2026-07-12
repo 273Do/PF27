@@ -12,6 +12,7 @@ export const onRequest = defineMiddleware(({ request, url }, next) => {
       headers: {
         "Content-Type": "text/plain; charset=utf-8",
         "Cache-Control": "no-store",
+        Vary: "User-Agent",
       },
     });
   }
