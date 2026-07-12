@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef } from "react";
 import { DEGRADATION_PARAMS } from "@/constants/area-degradation";
 import { captureScene, createGlitchRect } from "@/lib/area-degradation-render";
 
-export function useAreaDegradation(containerRef: React.RefObject<HTMLDivElement | null>) {
+export const useAreaDegradation = (containerRef: React.RefObject<HTMLDivElement | null>) => {
   const snapCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const isCapturingRef = useRef(false);
   const isMovingRef = useRef(false);
@@ -71,4 +71,4 @@ export function useAreaDegradation(containerRef: React.RefObject<HTMLDivElement 
     }, DEGRADATION_PARAMS.interval);
     return () => clearInterval(id);
   }, [spawnRect]);
-}
+};

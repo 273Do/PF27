@@ -5,11 +5,10 @@ import { Canvas } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
 
 import background from "@/assets/imgs/empty_warehouse_01_1k.hdr";
+import { CageModel } from "@/components/animations/3d/cage-model";
+import { LogoModel } from "@/components/animations/3d/logo-model";
+import { PostProcessing } from "@/components/animations/3d/post-processing";
 import { useDeviceMotion } from "@/hooks/use-device-motion";
-
-import { CageModel } from "../animations/3d/cage-model";
-import { LogoModel } from "../animations/3d/logo-model";
-import { PostProcessing } from "../animations/3d/post-processing";
 
 const DEBUG_MODE = false;
 
