@@ -3,14 +3,14 @@
 @import "simple-icons-font/font/simple-icons.min.css";
 
 :root {
-  --background: oklch(0.972 0.002 107);
-  --foreground: oklch(0.222 0.004 81);
-  --primary: oklch(0.222 0.004 81);
-  --primary-foreground: oklch(0.972 0.002 107);
-  --secondary: oklch(0.945 0.002 107);
-  --secondary-foreground: oklch(0.222 0.004 81);
-  --muted: oklch(0.945 0.002 107);
-  --muted-foreground: oklch(0.65 0.004 81);
+  --background: rgb(246, 246, 245);
+  --foreground: rgb(50, 50, 47);
+  --primary: rgb(50, 50, 47);
+  --primary-foreground: rgb(246, 246, 245);
+  --secondary: rgb(236, 236, 234);
+  --secondary-foreground: rgb(50, 50, 47);
+  --muted: rgb(236, 236, 234);
+  --muted-foreground: rgb(155, 155, 150);
 }
 
 @theme inline {
