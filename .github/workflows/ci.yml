@@ -5,8 +5,8 @@ on:
   pull_request:
 
 jobs:
-  ci:
-    name: CI
+  generate-schema:
+    name: Generate Schema
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,6 +20,35 @@ jobs:
 
       - name: Install dependencies
         run: vp install
+
+      - name: Sync types
+        run: vp run sync:types
+        env:
+          MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }}
+          MICROCMS_MANAGEMENT_API_KEY: ${{ secrets.MICROCMS_MANAGEMENT_API_KEY }}
+
+  check:
+    name: Check
+    needs: generate-schema
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: Setup Vite+
+        uses: voidzero-dev/setup-vp@2dec1e33f4ab2c6d5bce1b0c4607961bb1a3f7a1 # v1.12.0
+        with:
+          node-version: "24"
+          cache: true
+
+      - name: Install dependencies
+        run: vp install
+
+      - name: Sync types
+        run: vp run sync:types
+        env:
+          MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }}
+          MICROCMS_MANAGEMENT_API_KEY: ${{ secrets.MICROCMS_MANAGEMENT_API_KEY }}
 
       - name: Run checks
         run: vp check
