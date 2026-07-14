@@ -2,11 +2,14 @@
 
 import fs from "fs/promises";
 import path from "path";
+import { loadEnv } from "vite-plus";
+
+const env = loadEnv("", process.cwd(), "");
 
 const OUTPUT_FILE = path.join(process.cwd(), "src/gen/types", "microcms-schemas.ts");
 
-const SERVICE_DOMAIN = process.env.MICROCMS_SERVICE_DOMAIN;
-const API_KEY = process.env.MICROCMS_MANAGEMENT_API_KEY;
+const SERVICE_DOMAIN = env.MICROCMS_SERVICE_DOMAIN;
+const API_KEY = env.MICROCMS_MANAGEMENT_API_KEY;
 
 if (!SERVICE_DOMAIN || !API_KEY) {
   console.error("MICROCMS_SERVICE_DOMAIN and MICROCMS_MANAGEMENT_API_KEY must be set");

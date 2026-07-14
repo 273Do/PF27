@@ -9,9 +9,7 @@
     "astro": "astro",
     "astro:check": "astro check",
     "prepare": "vp config",
-    "fetch:schemas": "vpx tsx scripts/fetch-schemas.ts",
-    "generate:types": "vpx tsx scripts/generate-types.ts",
-    "sync:types": "vp run fetch:schemas && vp run generate:types"
+    "generate:types": "vpx tsx scripts/generate-types.ts"
   },
   "dependencies": {
     "@273do/winertia": "^1.0.0",
