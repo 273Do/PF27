@@ -18,29 +18,15 @@ jobs:
           node-version: "24"
           cache: true
 
-      - name: Check runtime
-        run: |
-          node -v
-          which node
-          vp --version
-
-      - name: Test Management API with curl
-        run: |
-          curl -v \
-            -H "X-MICROCMS-API-KEY: $MICROCMS_MANAGEMENT_API_KEY" \
-            "https://${MICROCMS_SERVICE_DOMAIN}.microcms-management.io/api/v1/apis"
-        env:
-          MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }}
-          MICROCMS_MANAGEMENT_API_KEY: ${{ secrets.MICROCMS_MANAGEMENT_API_KEY }}
-
       - name: Install dependencies
         run: vp install
 
-      - name: Sync types
-        run: vp run generate:types
-        env:
-          MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }}
-          MICROCMS_MANAGEMENT_API_KEY: ${{ secrets.MICROCMS_MANAGEMENT_API_KEY }}
+      # TODO: GitHub Actions では 500 エラーとなるため生成したものをコミットしている
+      # - name: Sync types
+      #   run: vp run generate:types
+      #   env:
+      #     MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }}
+      #     MICROCMS_MANAGEMENT_API_KEY: ${{ secrets.MICROCMS_MANAGEMENT_API_KEY }}
 
       - name: Run checks
         run: vp check
