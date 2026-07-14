@@ -1,14 +1,27 @@
 import type { MicroCMSQueries } from "microcms-js-sdk";
 
-import type { ProfileResponse, SandboxResponse, WorksResponse } from "@/gen/types/microcms-schemas";
+import type {
+  ProfileObj as Profile,
+  ProfileResponse,
+  SandboxResponse,
+  WorksResponse,
+} from "@/gen/types/microcms-schemas";
 
 import { client } from "./micro-cms";
 
 export const getProfile = async (queries?: MicroCMSQueries) => {
-  return client.getObject<ProfileResponse>({
+  const res = await client.getObject<ProfileResponse>({
     endpoint: "profile",
     queries,
   });
+
+  const profile: Omit<Profile, "skills"> = {
+    name: res.name,
+    bio: res.bio,
+    description: res.description,
+  };
+
+  return { profile, skills: res.skills };
 };
 
 export const getWorksList = async (queries?: MicroCMSQueries) => {
