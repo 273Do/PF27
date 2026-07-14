@@ -1,14 +1,15 @@
 ---
 import Label from "@/components/ui/label.astro";
-import type { WorksObj } from "@/gen/types/microcms-schemas";
+import type { WorksListItem } from "@/lib/fetch-contents";
 
 type Props = {
-  workList: WorksObj[];
+  workList: WorksListItem[];
 };
 
 const { workList } = Astro.props;
 
 const seenYears = new Set<string>();
+
 const formatDate = (dateStr: string) => {
   const d = dateStr.replace(/-/g, "").slice(0, 8);
   const yy = d.slice(2, 4);

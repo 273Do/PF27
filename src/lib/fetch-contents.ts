@@ -24,10 +24,17 @@ export const getProfile = async (queries?: MicroCMSQueries) => {
   return { profile, skills: res.skills };
 };
 
+export type WorksListItem = Pick<WorksResponse, "title" | "tags" | "releaseDate">;
+
 export const getWorksList = async (queries?: MicroCMSQueries) => {
-  return client.getList<WorksResponse>({
+  return client.getList<WorksListItem>({
     endpoint: "works",
-    queries: { orders: "-releaseDate", limit: 100, ...queries },
+    queries: {
+      orders: "-releaseDate",
+      limit: 100,
+      fields: ["title", "tags", "releaseDate"],
+      ...queries,
+    },
   });
 };
 
