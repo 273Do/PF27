@@ -107,7 +107,7 @@ const fieldKindToTypeScript = (field: Field, customFieldTypeNames: Map<string, s
   }
 };
 
-const toTypeName = (id: string): string => id.charAt(0).toUpperCase() + id.slice(1);
+const toTypeName = (id: string): string => id.charAt(0).toUpperCase() + id.slice(1) + "Obj";
 
 const generateCustomFieldType = (
   cf: CustomField,
@@ -145,11 +145,12 @@ const generateApiType = (
 
   typeDef += "};\n\n";
 
-  typeDef += `export type ${typeName}Response = ${typeName} & MicroCMSDate;\n\n`;
+  const baseName = typeName.replace(/Obj$/, "");
+  typeDef += `export type ${baseName}Response = ${typeName} & MicroCMSDate;\n\n`;
 
   if (api.type === "list") {
-    typeDef += `export type ${typeName}ListResponse = {\n`;
-    typeDef += `  contents: ${typeName}Response[];\n`;
+    typeDef += `export type ${baseName}ListResponse = {\n`;
+    typeDef += `  contents: ${baseName}Response[];\n`;
     typeDef += `  totalCount: number;\n`;
     typeDef += `  offset: number;\n`;
     typeDef += `  limit: number;\n`;

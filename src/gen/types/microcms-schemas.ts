@@ -1,47 +1,47 @@
 // このファイルは自動生成されています。手動で編集しないでください。
-// Generated at: 2026-07-14T13:27:09.285Z
+// Generated at: 2026-07-14T14:53:18.261Z
 
 import type { MicroCMSImage, MicroCMSDate } from "microcms-js-sdk";
 
 // Custom field: skill
-export type Skill = {
+export type SkillObj = {
   skillGenre: string;
   skills: string;
 };
 
 // Custom field: tech
-export type Tech = {
+export type TechObj = {
   techName?: string;
 };
 
 // Custom field: tag
-export type Tag = {
+export type TagObj = {
   tagName: string;
 };
 
 // Profile (object)
-export type Profile = {
+export type ProfileObj = {
   name: string;
   bio: string;
   description?: string;
-  skills?: Skill[];
+  skills?: SkillObj[];
 };
 
-export type ProfileResponse = Profile & MicroCMSDate;
+export type ProfileResponse = ProfileObj & MicroCMSDate;
 
 // Works (list)
-export type Works = {
+export type WorksObj = {
   title: string;
   article: string;
   releaseDate: string;
-  techs: Tech[];
-  tags: Tag[];
+  techs: TechObj[];
+  tags: TagObj[];
   githubLink?: string;
   appLink?: string;
   otherLink?: string;
 };
 
-export type WorksResponse = Works & MicroCMSDate;
+export type WorksResponse = WorksObj & MicroCMSDate;
 
 export type WorksListResponse = {
   contents: WorksResponse[];
@@ -51,14 +51,14 @@ export type WorksListResponse = {
 };
 
 // Sandbox (list)
-export type Sandbox = {
+export type SandboxObj = {
   title: string;
   image: MicroCMSImage;
-  tags: Tag[];
+  tags: TagObj[];
   link: string;
 };
 
-export type SandboxResponse = Sandbox & MicroCMSDate;
+export type SandboxResponse = SandboxObj & MicroCMSDate;
 
 export type SandboxListResponse = {
   contents: SandboxResponse[];
