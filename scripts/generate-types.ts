@@ -60,10 +60,15 @@ type ApiListItem = {
 };
 
 const fetchJson = async <T>(url: string): Promise<T> => {
+  console.log(`Fetching: ${url}`);
+  console.log(`API_KEY length: ${API_KEY!.length}, first 4 chars: ${API_KEY!.slice(0, 4)}`);
   const res = await fetch(url, {
     headers: { "X-MICROCMS-API-KEY": API_KEY! },
   });
   if (!res.ok) {
+    const body = await res.text();
+    console.error(`Response status: ${res.status} ${res.statusText}`);
+    console.error(`Response body: ${body}`);
     throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
   }
   return res.json() as Promise<T>;
