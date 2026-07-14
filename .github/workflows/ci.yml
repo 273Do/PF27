@@ -7,7 +7,6 @@ on:
 jobs:
   check:
     name: Check
-    needs: generate-schema
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
