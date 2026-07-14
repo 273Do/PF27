@@ -4,7 +4,11 @@
 import fs from "fs/promises";
 import path from "path";
 
-process.loadEnvFile();
+try {
+  process.loadEnvFile();
+} catch {
+  // .env file not found (e.g. CI environment) — rely on environment variables
+}
 
 const SERVICE_ID = process.env.MICROCMS_SERVICE_DOMAIN;
 const API_KEY = process.env.MICROCMS_MANAGEMENT_API_KEY;
