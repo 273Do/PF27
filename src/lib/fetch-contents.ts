@@ -27,7 +27,7 @@ export const getProfile = async (queries?: MicroCMSQueries) => {
 export const getWorksList = async (queries?: MicroCMSQueries) => {
   return client.getList<WorksResponse>({
     endpoint: "works",
-    queries: { orders: "-releaseDate", ...queries },
+    queries: { orders: "-releaseDate", limit: 100, ...queries },
   });
 };
 
