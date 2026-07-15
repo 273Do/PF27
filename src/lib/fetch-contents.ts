@@ -25,22 +25,22 @@ export const getProfile = async (queries?: MicroCMSQueries) => {
   return { profile, skills: res.skills };
 };
 
-export type WorksListItem = Pick<WorksResponse, "title" | "tags" | "releaseDate">;
+export type WorksListItem = Pick<WorksResponse, "title" | "tags" | "releaseDate"> & { id: string };
 
 export const getWorksList = async (queries?: MicroCMSQueries) => {
-  return client.getList<WorksListItem>({
+  return await client.getList<WorksListItem>({
     endpoint: "works",
     queries: {
       orders: "-releaseDate",
       limit: 100,
-      fields: ["title", "tags", "releaseDate"],
+      fields: ["id", "title", "tags", "releaseDate"],
       ...queries,
     },
   });
 };
 
 export const getWorksDetail = async (contentId: string, queries?: MicroCMSQueries) => {
-  return client.getListDetail<WorksResponse>({
+  return await client.getListDetail<WorksResponse>({
     endpoint: "works",
     contentId,
     queries,
@@ -48,8 +48,11 @@ export const getWorksDetail = async (contentId: string, queries?: MicroCMSQuerie
 };
 
 export const getSandboxList = async (queries?: MicroCMSQueries) => {
-  return client.getList<SandboxResponse>({
+  return await client.getList<SandboxResponse>({
     endpoint: "sandbox",
-    queries,
+    queries: {
+      limit: 100,
+      ...client,
+    },
   });
 };

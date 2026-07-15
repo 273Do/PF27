@@ -26,7 +26,10 @@ const formatDate = (dateStr: string) => {
     {
       workList.map((work) => (
         <div class="flex cursor-pointer items-center gap-2 py-1 transition-opacity group-hover:opacity-30 hover:opacity-100">
-          <a href={"works"} class="flex w-full items-center justify-between">
+          <a
+            href={`works/${work.id}`}
+            class="flex w-full items-center justify-between"
+          >
             <p class="text-primary">{work.title}</p>
             <p>{work.tags.map((tag) => tag.tagName).join(", ")}</p>
           </a>
