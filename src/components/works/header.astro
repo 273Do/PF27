@@ -1,6 +1,14 @@
 ---
 import Label from "@/components/ui/label.astro";
 import IconMarquee from "./icon-marquee.astro";
+import type { WorksObj } from "@/gen/types/microcms-schemas";
+
+type Props = { detail: Omit<WorksObj, "article"> };
+
+const { detail } = Astro.props;
+
+const { title, releaseDate, techs, tags, githubLink, appLink, otherLink } =
+  detail;
 ---
 
 <header>
@@ -8,14 +16,59 @@ import IconMarquee from "./icon-marquee.astro";
     <a href="/" class="w-fit"> &#x2190; Back</a>
     <div class="flex flex-col justify-between">
       <div class="flex items-center justify-between">
-        <Label>Service Title Here</Label>
-        <p class="w-14 shrink-0 text-muted-foreground">260707</p>
+        <Label>{title}</Label>
+        <p class="text-muted-foreground">
+          {releaseDate.replace(/-/g, "").slice(0, 8)}
+        </p>
       </div>
       <div class="flex items-center justify-between text-muted-foreground">
-        <p>Web, Frontend, WebGL, Animation</p>
-        <p class="cursor-alias">GitHub, Site, Note</p>
+        <p>{tags.map((tag) => tag.tagName).join(", ")}</p>
+        <div class="flex">
+          {
+            githubLink && (
+              <a
+                href={githubLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="cursor-alias hover:underline"
+              >
+                GitHub
+              </a>
+            )
+          }
+          {
+            appLink && (
+              <div class="flex items-center gap-1">
+                <span>,</span>
+                <a
+                  href={appLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="cursor-alias hover:underline"
+                >
+                  App
+                </a>
+              </div>
+            )
+          }
+          {
+            otherLink && (
+              <>
+                <span>,</span>
+                <a
+                  href={otherLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="cursor-alias hover:underline"
+                >
+                  Note
+                </a>
+              </>
+            )
+          }
+        </div>
       </div>
-      <IconMarquee />
+      <IconMarquee techs={techs} />
     </div>
   </div>
 </header>

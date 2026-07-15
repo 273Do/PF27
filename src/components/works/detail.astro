@@ -1,24 +1,9 @@
-<div>
-  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
-  consequatur temporibus natus ad sequi. Blanditiis repudiandae voluptate
-  obcaecati quas distinctio voluptatum accusamus ab dolore dolores, aliquam
-  reprehenderit eaque. Pariatur, minus iure, nihil quibusdam, fugiat expedita
-  praesentium error ea alias dolores necessitatibus quam! Eum, odio nulla
-  quisquam, temporibus perspiciatis consectetur enim laudantium libero
-  recusandae voluptatibus odit dolorum? Amet error neque provident ratione
-  repellat architecto aut modi recusandae! Voluptate nostrum quis quae nisi
-  architecto, molestias nihil at, dolorum vitae quaerat cum laboriosam enim quia
-  corporis eligendi mollitia error blanditiis facilis unde accusantium repellat
-  nesciunt est? Deleniti eveniet, hic, officia incidunt maiores obcaecati culpa
-  nesciunt dicta ad dolorem magni inventore natus! Beatae omnis officiis est
-  aliquam quibusdam ducimus minima aut officia eos blanditiis commodi,
-  molestias, voluptatem reprehenderit quas. Maxime quod qui quam tenetur cumque
-  nesciunt perspiciatis at sapiente assumenda, explicabo commodi corporis vel?
-  Est quae id veritatis optio doloremque? Maiores esse numquam, ipsa aliquid
-  voluptates fuga culpa recusandae impedit dolor repudiandae quasi sapiente
-  porro excepturi nostrum. Voluptates possimus minus repudiandae tempore
-  cupiditate explicabo repellat velit molestiae assumenda, eveniet accusamus,
-  iure ad qui placeat magni, voluptatum magnam accusantium? Consequuntur, alias
-  natus! Culpa aspernatur exercitationem ipsum! Dicta earum ut aliquid soluta
-  nisi ab. Placeat, exercitationem.
-</div>
+---
+type Props = {
+  article: string;
+};
+
+const { article } = Astro.props;
+---
+
+<div class="prose" set:html={article} />

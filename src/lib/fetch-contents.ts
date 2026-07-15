@@ -1,9 +1,10 @@
 import type { MicroCMSQueries } from "microcms-js-sdk";
 
 import type {
-  ProfileObj as Profile,
+  ProfileObj,
   ProfileResponse,
   SandboxResponse,
+  WorksObj,
   WorksResponse,
 } from "@/gen/types/microcms-schemas";
 
@@ -15,7 +16,7 @@ export const getProfile = async (queries?: MicroCMSQueries) => {
     queries,
   });
 
-  const profile: Omit<Profile, "skills"> = {
+  const profile: Omit<ProfileObj, "skills"> = {
     name: res.name,
     bio: res.bio,
     description: res.description,
@@ -40,11 +41,23 @@ export const getWorksList = async (queries?: MicroCMSQueries) => {
 };
 
 export const getWorksDetail = async (contentId: string, queries?: MicroCMSQueries) => {
-  return await client.getListDetail<WorksResponse>({
+  const res = await client.getListDetail<WorksResponse>({
     endpoint: "works",
     contentId,
     queries,
   });
+
+  const detail: Omit<WorksObj, "article"> = {
+    title: res.title,
+    releaseDate: res.releaseDate,
+    techs: res.techs,
+    tags: res.tags,
+    githubLink: res.githubLink,
+    appLink: res.appLink,
+    otherLink: res.otherLink,
+  };
+
+  return { detail, article: res.article };
 };
 
 export const getSandboxList = async (queries?: MicroCMSQueries) => {

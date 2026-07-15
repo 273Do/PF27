@@ -19,7 +19,7 @@ const work = await getWorksDetail(slug);
 ---
 
 <Layout>
-  <Header />
+  <Header detail={work.detail} />
   <Separator />
-  <Detail />
+  <Detail article={work.article} />
 </Layout>
