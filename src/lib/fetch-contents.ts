@@ -19,6 +19,7 @@ export const getProfile = async (queries?: MicroCMSQueries) => {
     name: res.name,
     bio: res.bio,
     description: res.description,
+    icon: res.icon,
   };
 
   return { profile, skills: res.skills };
