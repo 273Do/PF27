@@ -7,14 +7,20 @@ import Skills from "@/components/main/skills.astro";
 import Works from "@/components/main/works.astro";
 import Separator from "@/components/ui/separator.astro";
 
+import { getProfile, getWorksList, getSandboxList } from "@/lib/fetch-contents";
+
 export const prerender = false;
+
+const { profile, skills } = await getProfile();
+const { contents: works } = await getWorksList();
+const { contents: sandbox } = await getSandboxList();
 ---
 
 <Layout>
   <LogoAnimation client:idle />
-  <Profile />
+  <Profile profile={profile} />
   <Separator />
-  <Skills />
-  <Works />
-  <Sandbox />
+  <Skills skillList={skills} />
+  <Works workList={works} />
+  <Sandbox sandboxList={sandbox} />
 </Layout>

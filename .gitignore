@@ -24,3 +24,7 @@ pnpm-debug.log*
 .idea/
 
 .wrangler
+
+# generated types
+# TODO: GitHub Actions では 500 エラーとなるため生成したものをコミットしている
+# src/gen/

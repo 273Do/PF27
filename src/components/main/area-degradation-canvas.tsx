@@ -10,6 +10,7 @@ export function AreaDegradationCanvas() {
   return (
     <div
       ref={containerRef}
+      className="hidden sm:block"
       style={{
         position: "fixed",
         inset: 0,

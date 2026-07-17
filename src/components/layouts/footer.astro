@@ -9,15 +9,17 @@ import { SNS_LINKS, MAIL_ADDRESS } from "@/constants/links";
   <div class="z-10 flex gap-1 bg-background text-muted-foreground">
     {
       SNS_LINKS.map(({ title, url }, i) => (
-        <a
-          href={url}
-          class="flex cursor-alias hover:underline"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <p class="hover:underline">{title}</p>
+        <div class="flex items-center">
+          <a
+            href={url}
+            class="cursor-alias hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {title}
+          </a>
           <span>{i < SNS_LINKS.length - 1 && ","}</span>
-        </a>
+        </div>
       ))
     }
   </div>

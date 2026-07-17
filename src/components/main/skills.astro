@@ -1,24 +1,12 @@
 ---
 import Label from "@/components/ui/label.astro";
+import type { SkillObj } from "@/gen/types/microcms-schemas";
 
-const skills = [
-  { name: "Language", detail: "TypeScript, Python, PHP, GO, GLSL" },
-  {
-    name: "Frontend",
-    detail:
-      "React, Next.js, Vue.js, Astro, React Native, Tailwind CSS, R3F, GSAP, p5.js",
-  },
-  {
-    name: "Backend",
-    detail: "FastAPI, Flask, Laravel, MySQL, PostgreSQL, BaaS",
-  },
-  {
-    name: "DevOps",
-    detail: "Docker, Github Actions, AWS, Devcontainer, Claude Code, Ollama",
-  },
-  { name: "Creative", detail: "Figma, Blender, Affinity, Cavalry" },
-  { name: "Piano", detail: "KORG SV-1" },
-];
+type Props = {
+  skillList: SkillObj[];
+};
+
+const { skillList } = Astro.props;
 ---
 
 <div class="mt-6 flex flex-col">
@@ -26,12 +14,12 @@ const skills = [
     <Label>Skills</Label>
     <div class="relative h-6 w-full">
       {
-        skills.map((skill) => (
+        skillList.map(({ skills }) => (
           <p
             data-detail
             class="whitespace-wrap absolute left-0 text-muted-foreground opacity-0 transition-opacity duration-300 sm:right-0 sm:left-auto"
           >
-            {skill.detail}
+            {skills}
           </p>
         ))
       }
@@ -39,15 +27,15 @@ const skills = [
   </div>
   <div class="mt-6 flex w-full flex-wrap gap-0.5 text-muted-foreground sm:mt-2">
     {
-      skills.map((skill, i) => (
+      skillList.map(({ skillGenre }, i) => (
         <div class="flex items-center">
           <p
             data-skill={i}
             class="cursor-pointer px-0.5 leading-tight transition-all duration-300"
           >
-            {skill.name}
+            {skillGenre}
           </p>
-          <p>{i < skills.length - 1 && ","}</p>
+          <p>{i < skillList.length - 1 && ","}</p>
         </div>
       ))
     }

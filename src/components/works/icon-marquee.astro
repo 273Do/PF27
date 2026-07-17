@@ -1,17 +1,13 @@
 ---
-const icons = [
-  "astro",
-  "typescript",
-  "react",
-  "threedotjs",
-  "webgl",
-  "vite",
-  "claude",
-  "cloudflare",
-  "zedindustries",
-];
+import type { TechObj } from "@/gen/types/microcms-schemas";
 
-const loopCount = 27 / icons.length;
+type Props = {
+  techs: TechObj[];
+};
+
+const { techs } = Astro.props;
+
+const loopCount = 27 / techs.length;
 ---
 
 <div
@@ -22,7 +18,7 @@ const loopCount = 27 / icons.length;
   >
     {
       Array.from({ length: loopCount }).map(() =>
-        icons.map((icon) => <i class={`si si-${icon}`} />),
+        techs.map((tech) => <i class={`si si-${tech.techName}`} />),
       )
     }
   </div>

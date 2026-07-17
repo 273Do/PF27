@@ -1,74 +1,12 @@
 ---
 import Label from "@/components/ui/label.astro";
+import type { SandboxObj } from "@/gen/types/microcms-schemas";
 
-type WorkObj = {
-  name: string;
-  tags: string[];
-  imageUrl: string;
+type Props = {
+  sandboxList: SandboxObj[];
 };
 
-const works: WorkObj[] = [
-  {
-    imageUrl: "https://picsum.photos/seed/canvas/600/380",
-    name: "Canvas Flow",
-    tags: ["Tool", "Creative"],
-  },
-  {
-    imageUrl: "https://picsum.photos/seed/type/380/520",
-    name: "Type Grid",
-    tags: ["App", "Design"],
-  },
-  {
-    imageUrl: "https://picsum.photos/seed/midi/600/280",
-    name: "Midi Map",
-    tags: ["Tool", "Music"],
-  },
-  {
-    imageUrl: "https://picsum.photos/seed/sensor/440/600",
-    name: "Sensor Viz",
-    tags: ["App", "Sensor"],
-  },
-  {
-    imageUrl: "https://picsum.photos/seed/wave/600/340",
-    name: "Wave Form",
-    tags: ["Tool", "Audio"],
-  },
-  {
-    imageUrl: "https://picsum.photos/seed/palette/360/480",
-    name: "Palette Gen",
-    tags: ["App", "Design"],
-  },
-  {
-    imageUrl: "https://picsum.photos/seed/log/600/420",
-    name: "Log Viewer",
-    tags: ["Tool", "DevOps"],
-  },
-  {
-    imageUrl: "https://picsum.photos/seed/font/420/600",
-    name: "Font Lab",
-    tags: ["App", "Design"],
-  },
-  {
-    imageUrl: "https://picsum.photos/seed/mesh/600/300",
-    name: "Mesh Grid",
-    tags: ["Tool", "Creative"],
-  },
-  {
-    imageUrl: "https://picsum.photos/seed/noise/480/600",
-    name: "Noise Gen",
-    tags: ["App", "Creative"],
-  },
-  {
-    imageUrl: "https://picsum.photos/seed/dark/600/460",
-    name: "Dark Room",
-    tags: ["Tool", "Photo"],
-  },
-  {
-    imageUrl: "https://picsum.photos/seed/seq/320/300",
-    name: "Seq Step",
-    tags: ["App", "Music"],
-  },
-];
+const { sandboxList } = Astro.props;
 ---
 
 <div class="mt-6 flex flex-col gap-2">
@@ -82,19 +20,22 @@ const works: WorkObj[] = [
     <div class="w-full sm:w-1/2">
       <div class="w-full text-muted-foreground">
         {
-          works.map((work, i) => (
+          sandboxList.map((sandbox, i) => (
             <div>
-              <div
+              <a
                 data-row={i}
+                href={sandbox.link}
                 class="flex cursor-alias items-center justify-between py-1 transition-opacity duration-300"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <p class="text-primary">{work.name}</p>
-                <p>{work.tags.join(", ")}</p>
-              </div>
+                <p class="text-primary">{sandbox.title}</p>
+                <p>{sandbox.tags.map((tag) => tag.tagName).join(", ")}</p>
+              </a>
               <div data-img-mobile={i} class="hidden">
                 <img
-                  src={work.imageUrl}
-                  alt={work.name}
+                  src={sandbox.image.url}
+                  alt={sandbox.title}
                   class="w-full sm:hidden"
                 />
               </div>
@@ -105,17 +46,21 @@ const works: WorkObj[] = [
     </div>
     <div class="relative hidden w-1/2 invert sm:block">
       {
-        works.map((work, i) => (
+        sandboxList.map((sandbox, i) => (
           <div
             data-img={i}
             class="absolute inset-0 opacity-0 transition-opacity duration-300"
           >
-            <img src={work.imageUrl} alt={work.name} class="w-full invert" />
+            <img
+              src={sandbox.image.url}
+              alt={sandbox.title}
+              class="w-full invert"
+            />
             <div class="absolute inset-0 transition-opacity duration-300 [[data-sandbox]:hover_&]:opacity-0">
               <div class="dither-2xl w-full">
                 <img
-                  src={work.imageUrl}
-                  alt={work.name}
+                  src={sandbox.image.url}
+                  alt={sandbox.title}
                   class="w-full invert"
                 />
               </div>

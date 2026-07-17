@@ -1,29 +1,33 @@
 ---
 import { Image } from "astro:assets";
 
-import myImg from "@/assets/imgs/me.png";
-
 import Label from "@/components/ui/label.astro";
+import type { ProfileObj } from "@/gen/types/microcms-schemas";
+
+type Props = { profile: Omit<ProfileObj, "skills"> };
+
+const { profile } = Astro.props;
+
+const { name, bio, description, icon } = profile;
 ---
 
 <div class="mt-6 flex flex-col gap-4">
   <div class="flex items-center gap-4">
     <Image
-      src={myImg}
+      src={icon.url}
       width={75}
       height={75}
-      alt="me"
+      alt={name}
       class="z-10 rounded-full"
     />
     <div>
-      <Label>273*</Label>
+      <Label>{name}</Label>
       <p class="text-muted-foreground">
-        Develop, Graphic Design, Sensor Analysis, Experimental Creative, Piano
+        {bio}
       </p>
     </div>
   </div>
   <p class="text-muted-foreground">
-    ツナサンドと申します。 大阪を拠点に活動している Web
-    エンジニアです。 趣味でものづくりや表現活動を楽しんでおり、ツール開発、グラフィックデザイン、映像、音楽、インターネット美学などの実験的な表現に興味があります。
+    {description}
   </p>
 </div>
