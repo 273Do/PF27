@@ -29,5 +29,6 @@ export const SELF_INTRO = `
 ${C.bgWhite}${C.black}${profile.name}${C.reset}
 ${C.gray}${profile.bio}${C.reset}
 
+${C.bgWhite}${C.black}Link${C.reset}
 ${SNS_LINKS.map((link) => `${C.lightGray}${link.title}${C.reset}${C.gray} : ${linkText(link.url, link.name)}${C.reset}`).join("\n")}
 `;
