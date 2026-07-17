@@ -22,13 +22,16 @@ const { sandboxList } = Astro.props;
         {
           sandboxList.map((sandbox, i) => (
             <div>
-              <div
+              <a
                 data-row={i}
+                href={sandbox.link}
                 class="flex cursor-alias items-center justify-between py-1 transition-opacity duration-300"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <p class="text-primary">{sandbox.title}</p>
                 <p>{sandbox.tags.map((tag) => tag.tagName).join(", ")}</p>
-              </div>
+              </a>
               <div data-img-mobile={i} class="hidden">
                 <img
                   src={sandbox.image.url}
