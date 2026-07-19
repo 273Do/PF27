@@ -1,6 +1,7 @@
 import type { MicroCMSQueries } from "microcms-js-sdk";
 
 import type {
+  BannersResponse,
   ProfileObj,
   ProfileResponse,
   SandboxResponse,
@@ -65,7 +66,17 @@ export const getSandboxList = async (queries?: MicroCMSQueries) => {
     endpoint: "sandbox",
     queries: {
       limit: 100,
-      ...client,
+      ...queries,
+    },
+  });
+};
+
+export const getBannerList = async (queries?: MicroCMSQueries) => {
+  return await client.getList<BannersResponse>({
+    endpoint: "banners",
+    queries: {
+      limit: 100,
+      ...queries,
     },
   });
 };
