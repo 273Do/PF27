@@ -1,5 +1,8 @@
 ---
 import { SNS_LINKS, MAIL_ADDRESS } from "@/constants/links";
+import { getBannerList } from "@/lib/fetch-contents";
+
+const { contents: banners } = await getBannerList();
 ---
 
 <footer
@@ -10,6 +13,18 @@ import { SNS_LINKS, MAIL_ADDRESS } from "@/constants/links";
       <button id="banner-copy" class="cursor-copy">
         <img src="imgs/banner.png" />
       </button>
+      {
+        banners?.map((banner) => (
+          <a
+            href={banner.link}
+            class="cursor-alias"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={banner.imageLink} width="200" height="40" />
+          </a>
+        ))
+      }
     </div>
   </div>
   <div class="z-10 flex flex-col sm:items-end">
