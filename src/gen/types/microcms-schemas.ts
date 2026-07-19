@@ -1,5 +1,5 @@
 // このファイルは自動生成されています。手動で編集しないでください。
-// Generated at: 2026-07-15T01:22:48.707Z
+// Generated at: 2026-07-19T10:23:40.920Z
 
 import type { MicroCMSImage, MicroCMSDate } from "microcms-js-sdk";
 
@@ -17,6 +17,21 @@ export type TechObj = {
 // Custom field: tag
 export type TagObj = {
   tagName: string;
+};
+
+// Banners (list)
+export type BannersObj = {
+  link: string;
+  imageLink: string;
+};
+
+export type BannersResponse = BannersObj & MicroCMSDate;
+
+export type BannersListResponse = {
+  contents: BannersResponse[];
+  totalCount: number;
+  offset: number;
+  limit: number;
 };
 
 // Profile (object)

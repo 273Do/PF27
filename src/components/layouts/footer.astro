@@ -1,26 +1,76 @@
 ---
 import { SNS_LINKS, MAIL_ADDRESS } from "@/constants/links";
+import { getBannerList } from "@/lib/fetch-contents";
+
+const { contents: banners } = await getBannerList();
 ---
 
-<footer class="-mt-2 justify-between text-muted-foreground sm:flex">
-  <a class="cursor-alias hover:underline" href={`mailto:${MAIL_ADDRESS}`}>
-    {MAIL_ADDRESS}
-  </a>
-  <div class="z-10 flex gap-1 bg-background text-muted-foreground">
-    {
-      SNS_LINKS.map(({ title, url }, i) => (
-        <div class="flex items-center">
+<footer
+  class="-mt-2 sm:justify-between text-muted-foreground sm:flex-row flex-col-reverse flex"
+>
+  <div class="flex flex-col gap-2 mt-2">
+    <div class="flex-col flex gap-2">
+      <button id="banner-copy" class="cursor-copy">
+        <img src="imgs/banner.png" />
+      </button>
+      {
+        banners?.map((banner) => (
           <a
-            href={url}
-            class="cursor-alias hover:underline"
+            href={banner.link}
+            class="cursor-alias"
             target="_blank"
             rel="noopener noreferrer"
           >
-            {title}
+            <img src={banner.imageLink} width="200" height="40" />
           </a>
-          <span>{i < SNS_LINKS.length - 1 && ","}</span>
-        </div>
-      ))
-    }
+        ))
+      }
+    </div>
+  </div>
+  <div class="z-10 flex flex-col sm:items-end">
+    <a class="cursor-alias hover:underline" href={`mailto:${MAIL_ADDRESS}`}>
+      {MAIL_ADDRESS}
+    </a>
+    <div class="flex gap-1 bg-background text-muted-foreground">
+      {
+        SNS_LINKS.map(({ title, url }, i) => (
+          <div class="flex items-center">
+            <a
+              href={url}
+              class="cursor-alias hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {title}
+            </a>
+            <span>{i < SNS_LINKS.length - 1 && ","}</span>
+          </div>
+        ))
+      }
+    </div>
   </div>
 </footer>
+
+<script>
+  const URL = import.meta.env.SITE;
+
+  function init() {
+    const bannerHTML = `<a href="${URL}" target="_blank" rel="noopener noreferrer" class="cursor-copy"><img src="${URL}/imgs/banner.png" /></a>`;
+
+    const bannerEl = document.getElementById("banner-copy");
+
+    bannerEl?.addEventListener("click", () => {
+      navigator.clipboard.writeText(bannerHTML);
+      bannerEl.classList.add("copied");
+      setTimeout(() => bannerEl.classList.remove("copied"), 1500);
+    });
+  }
+
+  document.addEventListener("astro:page-load", init);
+</script>
+
+<style>
+  .copied {
+    cursor: context-menu;
+  }
+</style>

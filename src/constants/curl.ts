@@ -16,9 +16,10 @@ const C = {
 const linkText = (url: string, text: string) =>
   `\x1b]8;;${url}\x07${C.underline}${text}\x1b]8;;\x07${C.reset}`;
 
-const { profile } = await getProfile();
+export const getSelfIntro = async () => {
+  const { profile } = await getProfile();
 
-export const SELF_INTRO = `
+  return `
   ${C.lightGray}${C.bold}____ _____ _____        ${C.reset}${C.gray}${C.bold}__    __           _${C.reset}
  ${C.lightGray}${C.bold}|___ |___  |___ /__/\\__ ${C.reset}${C.gray}${C.bold}/ / /\\ \\ \\___  _ __| | _____${C.reset}
    ${C.lightGray}${C.bold}__) | / /  |_ \\     / ${C.reset}${C.gray}${C.bold}\\ \\/  \\/ / _ \\| '__| |/ / __|${C.reset}
@@ -32,3 +33,4 @@ ${C.gray}${profile.bio}${C.reset}
 ${C.bgWhite}${C.black}Link${C.reset}
 ${SNS_LINKS.map((link) => `${C.lightGray}${link.title}${C.reset}${C.gray} : ${linkText(link.url, link.name)}${C.reset}`).join("\n")}
 `;
+};
