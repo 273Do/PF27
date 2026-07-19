@@ -38,7 +38,7 @@ import { SNS_LINKS, MAIL_ADDRESS } from "@/constants/links";
   const URL = import.meta.env.SITE;
 
   function init() {
-    const bannerEl = `<a href="${URL}" target="_blank" rel="noopener noreferrer" class="cursor-copy"><img src="imgs/banner.png" /></a>`;
+    const bannerEl = `<a href="${URL}" target="_blank" rel="noopener noreferrer" class="cursor-copy"><img src="${URL}/imgs/banner.png" /></a>`;
 
     document.getElementById("banner-copy")?.addEventListener("click", () => {
       navigator.clipboard.writeText(bannerEl);
