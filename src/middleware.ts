@@ -1,13 +1,15 @@
 import { defineMiddleware } from "astro:middleware";
 
-import { SELF_INTRO } from "./constants/curl";
+import { getSelfIntro } from "./constants/curl";
 
-export const onRequest = defineMiddleware(({ request, url }, next) => {
+export const onRequest = defineMiddleware(async ({ request, url }, next) => {
   const userAgent = request.headers.get("user-agent") ?? "";
   const isCurl = /curl\//i.test(userAgent);
 
   if (url.pathname === "/" && isCurl) {
-    return new Response(SELF_INTRO, {
+    const selfIntro = await getSelfIntro();
+
+    return new Response(selfIntro, {
       status: 200,
       headers: {
         "Content-Type": "text/plain; charset=utf-8",
