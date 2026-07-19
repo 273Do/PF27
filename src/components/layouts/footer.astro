@@ -2,15 +2,17 @@
 import { SNS_LINKS, MAIL_ADDRESS } from "@/constants/links";
 ---
 
-<footer class="-mt-2 justify-between text-muted-foreground sm:flex">
+<footer
+  class="-mt-2 sm:justify-between text-muted-foreground sm:flex-row flex-col-reverse flex"
+>
   <div class="flex flex-col gap-2 mt-2">
-    <div class="flex items-end gap-2">
+    <div class="flex-col flex gap-2">
       <button id="banner-copy" class="cursor-copy">
         <img src="imgs/banner.png" />
       </button>
     </div>
   </div>
-  <div class="z-10 flex flex-col items-end">
+  <div class="z-10 flex flex-col sm:items-end">
     <a class="cursor-alias hover:underline" href={`mailto:${MAIL_ADDRESS}`}>
       {MAIL_ADDRESS}
     </a>
@@ -38,12 +40,22 @@ import { SNS_LINKS, MAIL_ADDRESS } from "@/constants/links";
   const URL = import.meta.env.SITE;
 
   function init() {
-    const bannerEl = `<a href="${URL}" target="_blank" rel="noopener noreferrer" class="cursor-copy"><img src="${URL}/imgs/banner.png" /></a>`;
+    const bannerHTML = `<a href="${URL}" target="_blank" rel="noopener noreferrer" class="cursor-copy"><img src="${URL}/imgs/banner.png" /></a>`;
 
-    document.getElementById("banner-copy")?.addEventListener("click", () => {
-      navigator.clipboard.writeText(bannerEl);
+    const bannerEl = document.getElementById("banner-copy");
+
+    bannerEl?.addEventListener("click", () => {
+      navigator.clipboard.writeText(bannerHTML);
+      bannerEl.classList.add("copied");
+      setTimeout(() => bannerEl.classList.remove("copied"), 1500);
     });
   }
 
   document.addEventListener("astro:page-load", init);
 </script>
+
+<style>
+  .copied {
+    cursor: context-menu;
+  }
+</style>
