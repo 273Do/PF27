@@ -25,28 +25,28 @@ const { title, releaseDate, techs, tags, githubLink, appLink, otherLink } =
         <p>{tags.map((tag) => tag.tagName).join(", ")}</p>
         <div class="flex">
           {
-            githubLink && (
+            appLink && (
               <a
-                href={githubLink}
+                href={appLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="cursor-alias hover:underline"
               >
-                GitHub
+                App
               </a>
             )
           }
           {
-            appLink && (
+            githubLink && (
               <div class="flex items-center gap-1">
-                <span>,</span>
+                {appLink && <span>,</span>}
                 <a
-                  href={appLink}
+                  href={githubLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   class="cursor-alias hover:underline"
                 >
-                  App
+                  GitHub
                 </a>
               </div>
             )
@@ -54,7 +54,7 @@ const { title, releaseDate, techs, tags, githubLink, appLink, otherLink } =
           {
             otherLink && (
               <div class="flex items-center gap-1">
-                <span>,</span>
+                {(appLink || githubLink) && <span>,</span>}
                 <a
                   href={otherLink}
                   target="_blank"
