@@ -24,3 +24,84 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
 }
+
+#md {
+  @apply space-y-4;
+}
+
+#md h1 {
+  @apply font-extrabold tracking-tight md:text-5xl;
+}
+
+#md h2 {
+  @apply font-bold tracking-tight;
+}
+
+#md h3 {
+  @apply font-semibold;
+}
+
+#md p {
+  @apply leading-snug;
+}
+
+#md ul {
+  @apply list-disc space-y-1 pl-6;
+}
+
+#md ol {
+  @apply list-decimal space-y-1 pl-6;
+}
+
+#md li {
+  @apply leading-snug;
+}
+
+#md a {
+  @apply text-foreground underline decoration-muted-foreground underline-offset-4 hover:cursor-alias hover:decoration-foreground;
+}
+
+#md code {
+  @apply rounded bg-muted px-1.5 py-0.5 font-mono text-sm;
+}
+
+#md pre {
+  @apply overflow-x-auto rounded-lg bg-muted p-4;
+}
+
+#md pre code {
+  @apply bg-transparent p-0;
+}
+
+#md blockquote {
+  @apply border-l-4 border-muted-foreground pl-4 italic;
+}
+
+#md hr {
+  @apply pointer-events-none my-8 box-border border-[0.5px] border-dashed border-muted-foreground;
+}
+
+#md img {
+  @apply mb-4;
+}
+
+#md table {
+  @apply w-full border-collapse;
+}
+
+#md th {
+  @apply border bg-muted px-4 py-2 text-left font-semibold;
+}
+
+#md td {
+  @apply border px-4 py-2;
+}
+
+#md > * + * {
+  @apply mt-4;
+}
+
+#md > h2 + *,
+#md > h3 + * {
+  @apply mt-6;
+}
