@@ -6,11 +6,11 @@ import { defineConfig, fontProviders } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import { loadEnv } from "vite-plus";
 
-const { LOCAL_URL } = loadEnv(process.env.NODE_ENV ?? "production", process.cwd(), "");
+const { LOCAL_URL, SITE_URL } = loadEnv(process.env.NODE_ENV ?? "production", process.cwd(), "");
 
 // https://astro.build/config
 export default defineConfig({
-  site: process.env.CF_PAGES_URL || LOCAL_URL,
+  site: SITE_URL || LOCAL_URL,
   adapter: cloudflare({ cacheOnDemandPages: true, imageCDN: false }),
   integrations: [
     sitemap({
