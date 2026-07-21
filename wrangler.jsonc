@@ -1,5 +1,4 @@
 {
-  "main": "dist/server/entry.mjs",
   "name": "pf27",
   "compatibility_date": "2026-07-21",
   "compatibility_flags": ["nodejs_compat"],
