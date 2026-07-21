@@ -2,7 +2,7 @@
 import { SEO } from "astro-seo";
 
 import JsonLd from "@/components/layouts/json-ld.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "@/constants/metadata";
+import { SITE_DESCRIPTION } from "@/constants/metadata";
 
 type Props = {
   title: string;
@@ -32,13 +32,12 @@ const imageUrl = new URL("imgs/opengraph-image.png", siteUrl).toString();
   canonical={canonicalURL.toString()}
   openGraph={{
     basic: {
-      title: title,
+      title,
       type: "website",
       image: imageUrl,
     },
     optional: {
       description: description || SITE_DESCRIPTION,
-      siteName: SITE_TITLE,
       locale: "ja_JP",
     },
     image: {
@@ -48,8 +47,8 @@ const imageUrl = new URL("imgs/opengraph-image.png", siteUrl).toString();
   }}
   twitter={{
     card: "summary_large_image",
-    title: title,
-    description: SITE_DESCRIPTION,
+    title,
+    description: description || SITE_DESCRIPTION,
     image: imageUrl,
     imageAlt: title,
   }}
