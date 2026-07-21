@@ -15,7 +15,7 @@ const { title, description, noindex } = Astro.props;
 const siteUrl = Astro.site || import.meta.env.LOCAL_URL;
 const canonicalURL = new URL(Astro.url.pathname, siteUrl);
 // 仮置き画像
-const imageUrl = new URL("imgs/opengraph-image.png", siteUrl).toString();
+const imageUrl = new URL("imgs/ogp.png", siteUrl).toString();
 ---
 
 <meta charset="utf-8" />
