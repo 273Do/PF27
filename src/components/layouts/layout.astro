@@ -10,18 +10,27 @@ import { SITE_TITLE } from "@/constants/metadata";
 import Footer from "./footer.astro";
 import GlobalMetadata from "./global-metadata.astro";
 
+type Props = {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+};
+
+const { title: customTitle, description, noindex } = Astro.props;
+
 const pathname = Astro.url.pathname
   .replace(import.meta.env.BASE_URL, "")
   .split("/")[0];
 
-const section =
-  pathname && `| ${pathname[0].toUpperCase() + pathname.slice(1)}`;
-const title = `${SITE_TITLE} ${section}`;
+const section = pathname
+  ? `${SITE_TITLE} | ${pathname[0].toUpperCase() + pathname.slice(1)}`
+  : SITE_TITLE;
+const title = customTitle || section;
 ---
 
 <html lang="ja">
   <head>
-    <GlobalMetadata title={title} />
+    <GlobalMetadata title={title} description={description} noindex={noindex} />
     <Font cssVariable="--font-zen-old-mincho" preload />
     <ClientRouter />
   </head>
