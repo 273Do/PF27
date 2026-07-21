@@ -10,7 +10,7 @@ const { LOCAL_URL } = loadEnv(process.env.NODE_ENV ?? "production", process.cwd(
 
 // https://astro.build/config
 export default defineConfig({
-  site: process.env.SITE_URL || process.env.CF_PAGES_URL || LOCAL_URL,
+  site: process.env.SITE_URL || LOCAL_URL,
   adapter: cloudflare({ cacheOnDemandPages: true, imageCDN: false }),
   integrations: [
     sitemap({
