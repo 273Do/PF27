@@ -10,7 +10,7 @@
     "astro:check": "astro check",
     "prepare": "vp config",
     "generate:types": "vpx tsx scripts/generate-types.ts",
-    "deploy": "wrangler deploy --config dist/server/wrangler.json"
+    "deploy": "wrangler deploy"
   },
   "dependencies": {
     "@273do/winertia": "^1.0.0",

@@ -21,13 +21,6 @@ jobs:
       - name: Install dependencies
         run: vp install
 
-      # TODO: GitHub Actions では 500 エラーとなるため生成したものをコミットしている
-      # - name: Sync types
-      #   run: vp run generate:types
-      #   env:
-      #     MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }}
-      #     MICROCMS_MANAGEMENT_API_KEY: ${{ secrets.MICROCMS_MANAGEMENT_API_KEY }}
-
       - name: Run checks
         run: vp check
 
