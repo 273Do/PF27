@@ -6,9 +6,11 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "@/constants/metadata";
 
 type Props = {
   title: string;
+  description?: string;
+  noindex?: boolean;
 };
 
-const { title } = Astro.props;
+const { title, description, noindex } = Astro.props;
 
 const siteUrl = Astro.site || import.meta.env.LOCAL_URL;
 const canonicalURL = new URL(Astro.url.pathname, siteUrl);
@@ -22,10 +24,11 @@ const imageUrl = new URL("imgs/opengraph-image.png", siteUrl).toString();
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="icon" href="/favicon.ico" />
 <link rel="sitemap" href="/sitemap-index.xml" />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
 
 <SEO
   title={title}
-  description={SITE_DESCRIPTION}
+  description={description || SITE_DESCRIPTION}
   canonical={canonicalURL.toString()}
   openGraph={{
     basic: {
@@ -34,7 +37,7 @@ const imageUrl = new URL("imgs/opengraph-image.png", siteUrl).toString();
       image: imageUrl,
     },
     optional: {
-      description: SITE_DESCRIPTION,
+      description: description || SITE_DESCRIPTION,
       siteName: SITE_TITLE,
       locale: "ja_JP",
     },
