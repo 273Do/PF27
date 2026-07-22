@@ -1,6 +1,7 @@
 ---
 import { SNS_LINKS, MAIL_ADDRESS } from "@/constants/links";
 import { getBannerList } from "@/lib/fetch-contents";
+import { Image } from "astro:assets";
 
 const { contents: banners } = await getBannerList();
 ---
@@ -11,7 +12,7 @@ const { contents: banners } = await getBannerList();
   <div class="flex flex-col gap-2 mt-2">
     <div class="flex-col flex gap-2">
       <button id="banner-copy" class="cursor-copy">
-        <img src="imgs/banner.png" />
+        <Image src="imgs/banner.png" width="200" height="40" alt="banner" />
       </button>
       {
         banners?.map((banner) => (
