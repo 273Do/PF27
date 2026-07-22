@@ -25,20 +25,26 @@ const { sandboxList } = Astro.props;
               <a
                 data-row={i}
                 href={sandbox.link}
-                class="flex cursor-alias items-center justify-between py-1 transition-opacity duration-300"
+                class="flex cursor-pointer items-center justify-between py-1 transition-opacity duration-300 sm:cursor-alias"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <p class="text-primary">{sandbox.title}</p>
                 <p>{sandbox.tags.map((tag) => tag.tagName).join(", ")}</p>
               </a>
-              <div data-img-mobile={i} class="hidden">
+              <a
+                data-img-mobile={i}
+                href={sandbox.link}
+                class="hidden cursor-alias"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <img
                   src={sandbox.image.url}
                   alt={sandbox.title}
                   class="w-full sm:hidden"
                 />
-              </div>
+              </a>
             </div>
           ))
         }
@@ -79,16 +85,29 @@ const { sandboxList } = Astro.props;
     const imgsMobile =
       document.querySelectorAll<HTMLElement>("[data-img-mobile]");
 
+    const isMobile = () => window.matchMedia("(max-width: 639px)").matches;
+
+    const showRow = (row: HTMLElement, i: number) => {
+      rows.forEach((r) => r.classList.add("opacity-30"));
+      row.classList.remove("opacity-30");
+
+      imgs.forEach((img) => img.classList.add("opacity-0"));
+      imgs[i]?.classList.remove("opacity-0");
+
+      imgsMobile.forEach((img) => img.classList.add("hidden"));
+      imgsMobile[i]?.classList.remove("hidden");
+    };
+
     rows.forEach((row, i) => {
       row.addEventListener("mouseenter", () => {
-        rows.forEach((r) => r.classList.add("opacity-30"));
-        row.classList.remove("opacity-30");
+        if (!isMobile()) showRow(row, i);
+      });
 
-        imgs.forEach((img) => img.classList.add("opacity-0"));
-        imgs[i]?.classList.remove("opacity-0");
-
-        imgsMobile.forEach((img) => img.classList.add("hidden"));
-        imgsMobile[i]?.classList.remove("hidden");
+      row.addEventListener("click", (e) => {
+        if (isMobile()) {
+          e.preventDefault();
+          showRow(row, i);
+        }
       });
     });
   }

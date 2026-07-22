@@ -1,17 +1,18 @@
 ---
 import { SNS_LINKS, MAIL_ADDRESS } from "@/constants/links";
 import { getBannerList } from "@/lib/fetch-contents";
+import { Image } from "astro:assets";
 
 const { contents: banners } = await getBannerList();
 ---
 
 <footer
-  class="-mt-2 sm:justify-between text-muted-foreground sm:flex-row flex-col-reverse flex"
+  class="-mt-2 flex flex-col-reverse text-muted-foreground sm:flex-row sm:justify-between"
 >
-  <div class="flex flex-col gap-2 mt-2">
-    <div class="flex-col flex gap-2">
+  <div class="mt-2 flex flex-col gap-2">
+    <div class="flex flex-col gap-2">
       <button id="banner-copy" class="cursor-copy">
-        <img src="imgs/banner.png" />
+        <Image src="/imgs/banner.png" width="200" height="40" alt="banner" />
       </button>
       {
         banners?.map((banner) => (
@@ -21,7 +22,12 @@ const { contents: banners } = await getBannerList();
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src={banner.imageLink} width="200" height="40" />
+            <Image
+              src={banner.imageLink}
+              width="200"
+              height="40"
+              alt={banner.link}
+            />
           </a>
         ))
       }
