@@ -11,9 +11,14 @@ import { getProfile, getWorksList, getSandboxList } from "@/lib/fetch-contents";
 
 export const prerender = false;
 
-const { profile, skills } = await getProfile();
-const { contents: works } = await getWorksList();
-const { contents: sandbox } = await getSandboxList();
+const fetchData = await Promise.all([
+  getProfile(),
+  getWorksList(),
+  getSandboxList(),
+]);
+
+const [{ profile, skills }, { contents: works }, { contents: sandbox }] =
+  fetchData;
 ---
 
 <Layout>
