@@ -9,19 +9,34 @@ import { getWorksList, getWorksDetail } from "@/lib/fetch-contents";
 export const getStaticPaths = async () => {
   const { contents: works } = await getWorksList();
 
-  return works.map((work) => ({
+  return works.map((work, i) => ({
     params: { slug: work.id },
+    props: {
+      prevId: works[i + 1]?.id,
+      nextId: works[i - 1]?.id,
+    },
   }));
 };
 
 const { slug } = Astro.params;
+
+const { prevId, nextId } = Astro.props;
+
+export type aroundWorksObj = {
+  aroundWorksIds: {
+    prevId?: string;
+    nextId?: string;
+  };
+};
+
+const aroundWorksIds = { prevId, nextId };
 
 const work = await getWorksDetail(slug);
 const title = `${work.detail.title} | ${SITE_TITLE}`;
 ---
 
 <Layout title={title}>
-  <Header detail={work.detail} />
+  <Header detail={work.detail} aroundWorksIds={aroundWorksIds} />
   <Separator />
   <Detail article={work.article} />
 </Layout>
