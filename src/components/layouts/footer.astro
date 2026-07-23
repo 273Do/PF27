@@ -33,11 +33,11 @@ const { contents: banners } = await getBannerList();
       }
     </div>
   </div>
-  <div class="z-10 flex flex-col sm:items-end">
+  <div class="z-10 flex flex-col bg-background sm:items-end">
     <a class="cursor-alias hover:underline" href={`mailto:${MAIL_ADDRESS}`}>
       {MAIL_ADDRESS}
     </a>
-    <div class="flex gap-1 bg-background text-muted-foreground">
+    <div class="flex gap-1 text-muted-foreground">
       {
         SNS_LINKS.map(({ title, url }, i) => (
           <div class="flex items-center">
