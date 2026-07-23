@@ -2,18 +2,41 @@
 import Label from "@/components/ui/label.astro";
 import IconMarquee from "./icon-marquee.astro";
 import type { WorksObj } from "@/gen/types/microcms-schemas";
+import type { aroundWorksObj } from "@/pages/works/[slug].astro";
 
-type Props = { detail: Omit<WorksObj, "article"> };
+type Props = {
+  detail: Omit<WorksObj, "article">;
+} & aroundWorksObj;
 
-const { detail } = Astro.props;
+const { detail, aroundWorksIds } = Astro.props;
 
 const { title, releaseDate, techs, tags, githubLink, appLink, otherLink } =
   detail;
+
+const { prevId, nextId } = aroundWorksIds;
 ---
 
 <header>
   <div class="flex flex-col gap-3">
-    <a href="/" class="w-fit"> &#x2190; Back</a>
+    <div class="flex items-center justify-between">
+      <a href="/" class="w-fit"> &#x2190; Back</a>
+      <div class="flex gap-4">
+        {
+          prevId && (
+            <a href={`/works/${prevId}`} class="w-fit">
+              &#x2190; Prev
+            </a>
+          )
+        }
+        {
+          nextId && (
+            <a href={`/works/${nextId}`} class="w-fit">
+              Next &#x2192;
+            </a>
+          )
+        }
+      </div>
+    </div>
     <div class="flex flex-col justify-between">
       <div class="sm:flex items-center justify-between">
         <Label>{title}</Label>
