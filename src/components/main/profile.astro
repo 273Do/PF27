@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 import Label from "@/components/ui/label.astro";
 import type { ProfileObj } from "@/gen/types/microcms-schemas";
 
-type Props = { profile: Omit<ProfileObj, "skills"> };
+type Props = { profile: Omit<ProfileObj, "mail" | "skills" | "links"> };
 
 const { profile } = Astro.props;
 

@@ -11,13 +11,15 @@ import type {
 
 import { client } from "./micro-cms";
 
+export type ProfileOnlyObj = Omit<ProfileObj, "mail" | "skills" | "links">;
+
 export const getProfile = async (queries?: MicroCMSQueries) => {
   const res = await client.getObject<ProfileResponse>({
     endpoint: "profile",
     queries,
   });
 
-  const profile: Omit<ProfileObj, "skills"> = {
+  const profile: ProfileOnlyObj = {
     name: res.name,
     bio: res.bio,
     description: res.description,
@@ -25,6 +27,15 @@ export const getProfile = async (queries?: MicroCMSQueries) => {
   };
 
   return { profile, skills: res.skills };
+};
+
+export const getFooterProfile = async (queries?: MicroCMSQueries) => {
+  const res = await client.getObject<Pick<ProfileResponse, "mail" | "links">>({
+    endpoint: "profile",
+    queries,
+  });
+
+  return { mail: res.mail, links: res.links };
 };
 
 export type WorksListItem = Pick<WorksResponse, "title" | "tags" | "releaseDate"> & { id: string };

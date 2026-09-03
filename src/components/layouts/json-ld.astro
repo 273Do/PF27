@@ -1,5 +1,4 @@
 ---
-import { MAIL_ADDRESS, SNS_LINKS } from "@/constants/links";
 import { SITE_TITLE, SITE_DESCRIPTION } from "@/constants/metadata";
 
 type Props = {
@@ -26,8 +25,6 @@ const personSchema = {
   "@type": "Person",
   name: "273*",
   url: siteUrl,
-  email: MAIL_ADDRESS,
-  sameAs: SNS_LINKS.filter((link) => link.url).map((link) => link.url),
   description: SITE_DESCRIPTION,
 };
 

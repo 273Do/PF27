@@ -1,5 +1,5 @@
 // このファイルは自動生成されています。手動で編集しないでください。
-// Generated at: 2026-07-19T10:23:40.920Z
+// Generated at: 2026-09-03T09:45:58.202Z
 
 import type { MicroCMSImage, MicroCMSDate } from "microcms-js-sdk";
 
@@ -7,6 +7,13 @@ import type { MicroCMSImage, MicroCMSDate } from "microcms-js-sdk";
 export type SkillObj = {
   skillGenre: string;
   skills: string;
+};
+
+// Custom field: link
+export type LinkObj = {
+  title: string;
+  link: string;
+  name: string;
 };
 
 // Custom field: tech
@@ -40,7 +47,9 @@ export type ProfileObj = {
   bio: string;
   description: string;
   icon: MicroCMSImage;
+  mail: string;
   skills: SkillObj[];
+  links: LinkObj[];
 };
 
 export type ProfileResponse = ProfileObj & MicroCMSDate;
