@@ -1,10 +1,9 @@
 ---
-import { MAIL_ADDRESS } from "@/constants/links";
-import { getBannerList, getProfileLinks } from "@/lib/fetch-contents";
+import { getBannerList, getFooterProfile } from "@/lib/fetch-contents";
 import { Image } from "astro:assets";
 
 const { contents: banners } = await getBannerList();
-const { links } = await getProfileLinks();
+const { mail, links } = await getFooterProfile();
 ---
 
 <footer
@@ -35,8 +34,8 @@ const { links } = await getProfileLinks();
     </div>
   </div>
   <div class="z-10 flex flex-col bg-background sm:items-end">
-    <a class="cursor-alias hover:underline" href={`mailto:${MAIL_ADDRESS}`}>
-      {MAIL_ADDRESS}
+    <a class="cursor-alias hover:underline" href={`mailto:${mail}`}>
+      {mail}
     </a>
     <div class="flex gap-1 text-muted-foreground">
       {
