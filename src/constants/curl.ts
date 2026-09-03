@@ -1,6 +1,4 @@
-import { getProfile } from "@/lib/fetch-contents";
-
-import { SNS_LINKS } from "./links";
+import { getProfile, getProfileLinks } from "@/lib/fetch-contents";
 
 const C = {
   lightGray: "\x1b[37m",
@@ -18,6 +16,7 @@ const linkText = (url: string, text: string) =>
 
 export const getSelfIntro = async () => {
   const { profile } = await getProfile();
+  const { links } = await getProfileLinks();
 
   return `
   ${C.lightGray}${C.bold}____ _____ _____        ${C.reset}${C.gray}${C.bold}__    __           _${C.reset}
@@ -31,6 +30,6 @@ ${C.bgWhite}${C.black}${profile.name}${C.reset}
 ${C.gray}${profile.bio}${C.reset}
 
 ${C.bgWhite}${C.black}Link${C.reset}
-${SNS_LINKS.map((link) => `${C.lightGray}${link.title}${C.reset}${C.gray} : ${linkText(link.url, link.name)}${C.reset}`).join("\n")}
+${links.map((link) => `${C.lightGray}${link.title}${C.reset}${C.gray} : ${linkText(link.link, link.name)}${C.reset}`).join("\n")}
 `;
 };

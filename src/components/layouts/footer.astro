@@ -1,9 +1,10 @@
 ---
-import { SNS_LINKS, MAIL_ADDRESS } from "@/constants/links";
-import { getBannerList } from "@/lib/fetch-contents";
+import { MAIL_ADDRESS } from "@/constants/links";
+import { getBannerList, getProfileLinks } from "@/lib/fetch-contents";
 import { Image } from "astro:assets";
 
 const { contents: banners } = await getBannerList();
+const { links } = await getProfileLinks();
 ---
 
 <footer
@@ -39,17 +40,17 @@ const { contents: banners } = await getBannerList();
     </a>
     <div class="flex gap-1 text-muted-foreground">
       {
-        SNS_LINKS.map(({ title, url }, i) => (
+        links.map(({ title, link }, i) => (
           <div class="flex items-center">
             <a
-              href={url}
+              href={link}
               class="cursor-alias hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
               {title}
             </a>
-            <span>{i < SNS_LINKS.length - 1 && ","}</span>
+            <span>{i < links.length - 1 && ","}</span>
           </div>
         ))
       }
