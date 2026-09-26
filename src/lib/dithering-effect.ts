@@ -11,6 +11,7 @@ type DitheringEffectOptions = {
   luminanceMethod?: number;
   invertColor?: boolean;
   pixelSizeRatio?: number;
+  coverageThreshold?: number;
   grayscaleOnly?: boolean;
   foregroundColor?: string;
   backgroundColor?: string;
@@ -32,6 +33,7 @@ export class DitheringEffect extends Effect {
       luminanceMethod,
       invertColor,
       pixelSizeRatio,
+      coverageThreshold,
       grayscaleOnly,
       foregroundColor,
       backgroundColor,
@@ -45,6 +47,7 @@ export class DitheringEffect extends Effect {
       ["invertColor", new THREE.Uniform(invertColor ? 1 : 0)],
       ["ditheringEnabled", new THREE.Uniform(1)],
       ["pixelSizeRatio", new THREE.Uniform(pixelSizeRatio)],
+      ["coverageThreshold", new THREE.Uniform(coverageThreshold)],
       ["grayscaleOnly", new THREE.Uniform(grayscaleOnly ? 1 : 0)],
       ["foregroundColor", new THREE.Uniform(hexToVec3(foregroundColor))],
       ["backgroundColor", new THREE.Uniform(hexToVec3(backgroundColor))],

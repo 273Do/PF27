@@ -14,10 +14,11 @@ export const CAGE = {
 export const DITHER_DEFAULT_OPTIONS = {
   time: 0,
   resolution: new THREE.Vector2(1, 1),
-  gridSize: 4.0,
+  gridSize: 3.5,
   luminanceMethod: 0,
   invertColor: false,
   pixelSizeRatio: 5,
+  coverageThreshold: 0.5,
   grayscaleOnly: true,
   foregroundColor: "#1B1A18",
   backgroundColor: "#F6F6F5",

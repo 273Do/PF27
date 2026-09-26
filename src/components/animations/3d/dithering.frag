@@ -6,8 +6,12 @@ uniform float gridSize;
 uniform float luminanceMethod;
 uniform float invertColor;
 uniform float pixelSizeRatio;
+uniform float coverageThreshold;
 uniform vec3 foregroundColor;
 uniform vec3 backgroundColor;
+
+// 1ブロックあたりのサンプリング数）
+const int BLOCK_SAMPLES = 3;
 
 /**
  * Ordered dithering matrix lookup
@@ -53,21 +57,41 @@ bool getValue(float brightness, vec2 pos) {
   }
 }
 
-void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor) {
+/**
+ * ブロック内を格子状にサンプリングし、平均色と被覆率を求める
+ * ピクセル単位ではなくブロック単位でジオメトリの有無を判定するため、輪郭もモザイクになる
+ * @param blockOrigin - ブロック左下のピクセル座標
+ * @param pixelSize - ブロック1辺のピクセル数
+ * @return vec4 - rgb: アルファで重み付けした平均色, a: ブロックの被覆率
+ */
+vec4 sampleBlock(vec2 blockOrigin, float pixelSize) {
+  vec4 acc = vec4(0.0);
+  float stride = pixelSize / float(BLOCK_SAMPLES);
 
-  // ジオメトリがないピクセルは透過
-  if (inputColor.a < 0.01) {
-    outputColor = vec4(0.0);
-    return;
+  for (int y = 0; y < BLOCK_SAMPLES; y++) {
+    for (int x = 0; x < BLOCK_SAMPLES; x++) {
+      vec2 pos = blockOrigin + (vec2(float(x), float(y)) + 0.5) * stride;
+      vec4 texel = texture2D(inputBuffer, pos / resolution);
+      acc += vec4(texel.rgb * texel.a, texel.a);
+    }
   }
 
-  vec2 fragCoord = uv * resolution;
-  vec3 baseColor;
+  return acc / float(BLOCK_SAMPLES * BLOCK_SAMPLES);
+}
 
-  // グリッドサイズと比率に基づいて、ピクセル化
+void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor) {
+  vec2 fragCoord = uv * resolution;
+
+  // グリッドサイズと比率に基づいて、ピクセル化（モザイクの1マス）
   float pixelSize = gridSize * pixelSizeRatio;
-  vec2 pixelatedUV = floor(fragCoord / pixelSize) * pixelSize / resolution;
-  baseColor = texture2D(inputBuffer, pixelatedUV).rgb;
+  vec2 blockOrigin = floor(fragCoord / pixelSize) * pixelSize;
+
+  // ブロック単位に平均化した色と被覆率
+  vec4 block = sampleBlock(blockOrigin, pixelSize);
+  float coverage = block.a;
+
+  // 背景の上にブロックを合成し、ジオメトリの縁もモザイクの一部として扱う
+  vec3 baseColor = block.rgb + backgroundColor * (1.0 - coverage);
 
   // 輝度計算
   float luminance = dot(baseColor, vec3(1., 1., 1.));
@@ -75,14 +99,15 @@ void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor)
   // Dither 判定
   bool dithered = getValue(luminance, fragCoord);
 
-  // Dither パターン割り当て
-  vec3 ditherColor = dithered ? foregroundColor : backgroundColor;
+  // 被覆率の低いブロックは透過（輪郭がブロック単位に量子化される）
+  if (!dithered && coverage < coverageThreshold) {
+    outputColor = vec4(0.0);
+    return;
+  }
 
-  // ピクセルブロック内に統一適用
-  vec2 currentPixel = floor(fragCoord / pixelSize);
-  vec2 originalPixel = floor(uv * resolution / pixelSize);
-  baseColor = ditherColor;
+  // Dither パターン割り当て
+  baseColor = dithered ? foregroundColor : backgroundColor;
 
   // 出力
-  outputColor = vec4(baseColor, inputColor.a);
+  outputColor = vec4(baseColor, 1.0);
 }
