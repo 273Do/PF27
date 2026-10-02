@@ -13,32 +13,28 @@ const { skillList } = Astro.props;
   <div class="items-center justify-between sm:flex">
     <Label>Skills</Label>
     <div class="relative h-6 w-full">
-      {
-        skillList.map(({ skills }) => (
-          <p
-            data-detail
-            class="whitespace-wrap absolute left-0 text-muted-foreground opacity-0 transition-opacity duration-300 sm:right-0 sm:left-auto"
-          >
-            {skills}
-          </p>
-        ))
-      }
+      {skillList.map(({ skills }) => (
+        <p
+          data-detail
+          class="whitespace-wrap absolute left-0 text-muted-foreground opacity-0 transition-opacity duration-300 sm:right-0 sm:left-auto"
+        >
+          {skills}
+        </p>
+      ))}
     </div>
   </div>
   <div class="mt-6 flex w-full flex-wrap gap-0.5 text-muted-foreground sm:mt-2">
-    {
-      skillList.map(({ skillGenre }, i) => (
-        <div class="flex items-center">
-          <p
-            data-skill={i}
-            class="cursor-pointer px-0.5 leading-tight transition-all duration-300"
-          >
-            {skillGenre}
-          </p>
-          <p>{i < skillList.length - 1 && ","}</p>
-        </div>
-      ))
-    }
+    {skillList.map(({ skillGenre }, i) => (
+      <div class="flex items-center">
+        <p
+          data-skill={i}
+          class="cursor-pointer px-0.5 leading-tight transition-all duration-300"
+        >
+          {skillGenre}
+        </p>
+        <p>{i < skillList.length - 1 && ","}</p>
+      </div>
+    ))}
   </div>
 </div>
 

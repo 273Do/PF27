@@ -1,5 +1,5 @@
 // このファイルは自動生成されています。手動で編集しないでください。
-// Generated at: 2026-09-03T09:45:58.202Z
+// Generated at: 2026-10-02T01:54:01.040Z
 
 import type { MicroCMSImage, MicroCMSDate } from "microcms-js-sdk";
 
@@ -64,6 +64,7 @@ export type WorksObj = {
   githubLink?: string;
   appLink?: string;
   otherLink?: string;
+  pickup: boolean;
 };
 
 export type WorksResponse = WorksObj & MicroCMSDate;

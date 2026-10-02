@@ -34,9 +34,7 @@ const title = customTitle || section;
     <Font cssVariable="--font-zen-old-mincho" preload />
     <ClientRouter />
   </head>
-  <body
-    class="my-25 flex w-full justify-center bg-background font-serif antialiased selection:bg-secondary-foreground selection:text-primary-foreground"
-  >
+  <body class="my-25 flex w-full justify-center bg-background font-serif antialiased selection:bg-secondary-foreground selection:text-primary-foreground">
     <AreaDegradationCanvas client:idle />
     <div class="w-full max-w-2xl px-4 sm:mx-4 sm:w-auto sm:px-0">
       <slot />

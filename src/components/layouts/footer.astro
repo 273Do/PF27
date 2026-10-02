@@ -6,31 +6,27 @@ const { contents: banners } = await getBannerList();
 const { mail, links } = await getFooterProfile();
 ---
 
-<footer
-  class="-mt-2 flex flex-col-reverse text-muted-foreground sm:flex-row sm:justify-between"
->
+<footer class="-mt-2 flex flex-col-reverse text-muted-foreground sm:flex-row sm:justify-between">
   <div class="mt-2 flex flex-col gap-2">
     <div class="flex flex-col gap-2">
       <button id="banner-copy" class="cursor-copy">
         <Image src="/imgs/banner.png" width="200" height="40" alt="banner" />
       </button>
-      {
-        banners?.map((banner) => (
-          <a
-            href={banner.link}
-            class="cursor-alias"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              src={banner.imageLink}
-              width="200"
-              height="40"
-              alt={banner.link}
-            />
-          </a>
-        ))
-      }
+      {banners?.map((banner) => (
+        <a
+          href={banner.link}
+          class="cursor-alias"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            src={banner.imageLink}
+            width="200"
+            height="40"
+            alt={banner.link}
+          />
+        </a>
+      ))}
     </div>
   </div>
   <div class="z-10 flex flex-col bg-background sm:items-end">
@@ -38,21 +34,19 @@ const { mail, links } = await getFooterProfile();
       {mail}
     </a>
     <div class="flex gap-1 text-muted-foreground">
-      {
-        links.map(({ title, link }, i) => (
-          <div class="flex items-center">
-            <a
-              href={link}
-              class="cursor-alias hover:underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {title}
-            </a>
-            <span>{i < links.length - 1 && ","}</span>
-          </div>
-        ))
-      }
+      {links.map(({ title, link }, i) => (
+        <div class="flex items-center">
+          <a
+            href={link}
+            class="cursor-alias hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {title}
+          </a>
+          <span>{i < links.length - 1 && ","}</span>
+        </div>
+      ))}
     </div>
   </div>
 </footer>
