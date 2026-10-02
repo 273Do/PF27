@@ -38,7 +38,9 @@ export const getFooterProfile = async (queries?: MicroCMSQueries) => {
   return { mail: res.mail, links: res.links };
 };
 
-export type WorksListItem = Pick<WorksResponse, "title" | "tags" | "releaseDate"> & { id: string };
+export type WorksListItem = Pick<WorksResponse, "title" | "tags" | "releaseDate" | "pickup"> & {
+  id: string;
+};
 
 export const getWorksList = async (queries?: MicroCMSQueries) => {
   return await client.getList<WorksListItem>({
@@ -46,7 +48,7 @@ export const getWorksList = async (queries?: MicroCMSQueries) => {
     queries: {
       orders: "-releaseDate",
       limit: 100,
-      fields: ["id", "title", "tags", "releaseDate"],
+      fields: ["id", "title", "tags", "releaseDate", "pickup"],
       ...queries,
     },
   });
@@ -67,6 +69,7 @@ export const getWorksDetail = async (contentId: string, queries?: MicroCMSQuerie
     githubLink: res.githubLink,
     appLink: res.appLink,
     otherLink: res.otherLink,
+    pickup: res.pickup,
   };
 
   return { detail, article: res.article };
