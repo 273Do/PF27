@@ -19,22 +19,21 @@ const { prevId, nextId } = aroundWorksIds;
 <header>
   <div class="flex flex-col gap-3">
     <div class="flex items-center justify-between">
-      <a href="/" class="w-fit"> &#x2190; Back</a>
+      <a href="/" class="w-fit">
+        {" "}
+        &#x2190; Back
+      </a>
       <div class="flex gap-4">
-        {
-          prevId && (
-            <a href={`/works/${prevId}`} class="w-fit">
-              &#x2190; Prev
-            </a>
-          )
-        }
-        {
-          nextId && (
-            <a href={`/works/${nextId}`} class="w-fit">
-              Next &#x2192;
-            </a>
-          )
-        }
+        {prevId && (
+          <a href={`/works/${prevId}`} class="w-fit">
+            &#x2190; Prev
+          </a>
+        )}
+        {nextId && (
+          <a href={`/works/${nextId}`} class="w-fit">
+            Next &#x2192;
+          </a>
+        )}
       </div>
     </div>
     <div class="flex flex-col justify-between">
@@ -47,48 +46,42 @@ const { prevId, nextId } = aroundWorksIds;
       <div class="flex items-center justify-between text-muted-foreground">
         <p>{tags.map((tag) => tag.tagName).join(", ")}</p>
         <div class="flex">
-          {
-            appLink && (
+          {appLink && (
+            <a
+              href={appLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="cursor-alias hover:underline"
+            >
+              App
+            </a>
+          )}
+          {githubLink && (
+            <div class="flex items-center gap-1">
+              {appLink && <span>,</span>}
               <a
-                href={appLink}
+                href={githubLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="cursor-alias hover:underline"
               >
-                App
+                GitHub
               </a>
-            )
-          }
-          {
-            githubLink && (
-              <div class="flex items-center gap-1">
-                {appLink && <span>,</span>}
-                <a
-                  href={githubLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="cursor-alias hover:underline"
-                >
-                  GitHub
-                </a>
-              </div>
-            )
-          }
-          {
-            otherLink && (
-              <div class="flex items-center gap-1">
-                {(appLink || githubLink) && <span>,</span>}
-                <a
-                  href={otherLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="cursor-alias hover:underline"
-                >
-                  Note
-                </a>
-              </div>
-            )
-          }
+            </div>
+          )}
+          {otherLink && (
+            <div class="flex items-center gap-1">
+              {(appLink || githubLink) && <span>,</span>}
+              <a
+                href={otherLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="cursor-alias hover:underline"
+              >
+                Note
+              </a>
+            </div>
+          )}
         </div>
       </div>
       <IconMarquee techs={techs} />

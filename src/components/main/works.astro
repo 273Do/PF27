@@ -23,19 +23,17 @@ const formatDate = (dateStr: string) => {
 <div class="mt-6 flex flex-col gap-2">
   <Label>Works</Label>
   <div class="group text-muted-foreground">
-    {
-      workList.map((work) => (
-        <a
-          href={`works/${work.id}`}
-          class="cursor-pointer items-center justify-between gap-2 py-1 transition-opacity group-hover:opacity-30 hover:opacity-100 sm:flex"
-        >
-          <p class="text-primary">{work.title}</p>
-          <div class="flex items-center justify-between gap-2 max-sm:mb-2.5 max-sm:leading-3">
-            <p>{work.tags.map((tag) => tag.tagName).join(", ")}</p>
-            <p class="w-14 shrink-0">{formatDate(work.releaseDate)}</p>
-          </div>
-        </a>
-      ))
-    }
+    {workList.map((work) => (
+      <a
+        href={`works/${work.id}`}
+        class="cursor-pointer items-center justify-between gap-2 py-1 transition-opacity group-hover:opacity-30 hover:opacity-100 sm:flex"
+      >
+        <p class="text-primary">{work.title}</p>a a
+        <div class="flex items-center justify-between gap-2 max-sm:mb-2.5 max-sm:leading-3">
+          <p>{work.tags.map((tag) => tag.tagName).join(", ")}</p>
+          <p class="w-14 shrink-0">{formatDate(work.releaseDate)}</p>
+        </div>
+      </a>
+    ))}
   </div>
 </div>
