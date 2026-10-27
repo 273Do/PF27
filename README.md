@@ -38,10 +38,6 @@ All commands are run from the root of the project, from a terminal:
 | `vp run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `vp run astro -- --help` | Get help using the Astro CLI                     |
 
-## フォーマット
-
-oxfmt は `.astro` ファイルに対応していないため、`prettier` を使う方法もあるが、簡潔化のため `.astro` ファイルをフォーマットする際は一度 `.tsx` として手動でフォーマットしてから `.astro` に戻している。
-
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).

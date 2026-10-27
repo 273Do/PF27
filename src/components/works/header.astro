@@ -1,8 +1,9 @@
 ---
 import Label from "@/components/ui/label.astro";
-import IconMarquee from "./icon-marquee.astro";
 import type { WorksObj } from "@/gen/types/microcms-schemas";
 import type { aroundWorksObj } from "@/pages/works/[slug].astro";
+
+import IconMarquee from "./icon-marquee.astro";
 
 type Props = {
   detail: Omit<WorksObj, "article">;
@@ -10,8 +11,7 @@ type Props = {
 
 const { detail, aroundWorksIds } = Astro.props;
 
-const { title, releaseDate, techs, tags, githubLink, appLink, otherLink } =
-  detail;
+const { title, releaseDate, techs, tags, githubLink, appLink, otherLink } = detail;
 
 const { prevId, nextId } = aroundWorksIds;
 ---
@@ -37,11 +37,9 @@ const { prevId, nextId } = aroundWorksIds;
       </div>
     </div>
     <div class="flex flex-col justify-between">
-      <div class="sm:flex items-center justify-between">
+      <div class="items-center justify-between sm:flex">
         <Label>{title}</Label>
-        <p class="text-muted-foreground">
-          {releaseDate.replace(/-/g, "").slice(2, 8)}
-        </p>
+        <p class="text-muted-foreground">{releaseDate.replace(/-/g, "").slice(2, 8)}</p>
       </div>
       <div class="flex items-center justify-between text-muted-foreground">
         <p>{tags.map((tag) => tag.tagName).join(", ")}</p>

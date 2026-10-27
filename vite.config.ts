@@ -2,6 +2,7 @@ import { defineConfig } from "vite-plus";
 
 export default defineConfig({
   fmt: {
+    astro: true,
     sortImports: {
       newlinesBetween: true,
       customGroups: [
@@ -32,7 +33,7 @@ export default defineConfig({
     },
   },
   staged: {
-    "*.{js,ts,jsx,tsx}": "vp check --fix",
+    "*.{js,ts,jsx,tsx,astro}": "vp check --fix",
     "*.astro": "vp run astro:check",
   },
   lint: { options: { typeAware: true, typeCheck: true } },

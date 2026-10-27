@@ -13,6 +13,10 @@
       }
     },
     "oxfmt": {
+      "binary": {
+        "path": "node_modules/.bin/vp",
+        "arguments": ["fmt", "--lsp"]
+      },
       "initialization_options": {
         "settings": {
           "fmt.configPath": "./vite.config.ts",
@@ -75,10 +79,19 @@
         }
       ]
     },
-    // "Astro": {
-    //   "format_on_save": "on",
-    //   "formatter": "language_server"
-    // },
+    "Astro": {
+      "format_on_save": "on",
+      "prettier": {
+        "allowed": false
+      },
+      "formatter": [
+        {
+          "language_server": {
+            "name": "oxfmt"
+          }
+        }
+      ]
+    },
     "JavaScript": {
       "format_on_save": "on",
       "prettier": {
