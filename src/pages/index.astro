@@ -6,19 +6,13 @@ import Sandbox from "@/components/main/sandbox.astro";
 import Skills from "@/components/main/skills.astro";
 import Works from "@/components/main/works.astro";
 import Separator from "@/components/ui/separator.astro";
-
 import { getProfile, getWorksList, getSandboxList } from "@/lib/fetch-contents";
 
 export const prerender = false;
 
-const fetchData = await Promise.all([
-  getProfile(),
-  getWorksList(),
-  getSandboxList(),
-]);
+const fetchData = await Promise.all([getProfile(), getWorksList(), getSandboxList()]);
 
-const [{ profile, skills }, { contents: works }, { contents: sandbox }] =
-  fetchData;
+const [{ profile, skills }, { contents: works }, { contents: sandbox }] = fetchData;
 ---
 
 <Layout>

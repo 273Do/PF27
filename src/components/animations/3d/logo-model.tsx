@@ -15,7 +15,7 @@ export function LogoModel() {
   return (
     <group scale={50} position={[0, 6, 0]}>
       {Object.entries(nodes)
-        .filter(([_, obj]) => obj.type === "Mesh")
+        .filter(([, obj]) => obj.type === "Mesh")
         .map(([key, mesh]) => {
           return (
             <RigidBody key={key} colliders="hull" ccd friction={1} restitution={0.1}>

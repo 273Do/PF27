@@ -1,6 +1,7 @@
 ---
-import { getBannerList, getFooterProfile } from "@/lib/fetch-contents";
 import { Image } from "astro:assets";
+
+import { getBannerList, getFooterProfile } from "@/lib/fetch-contents";
 
 const { contents: banners } = await getBannerList();
 const { mail, links } = await getFooterProfile();
@@ -13,18 +14,8 @@ const { mail, links } = await getFooterProfile();
         <Image src="/imgs/banner.png" width="200" height="40" alt="banner" />
       </button>
       {banners?.map((banner) => (
-        <a
-          href={banner.link}
-          class="cursor-alias"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            src={banner.imageLink}
-            width="200"
-            height="40"
-            alt={banner.link}
-          />
+        <a href={banner.link} class="cursor-alias" target="_blank" rel="noopener noreferrer">
+          <Image src={banner.imageLink} width="200" height="40" alt={banner.link} />
         </a>
       ))}
     </div>

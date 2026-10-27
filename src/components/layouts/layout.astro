@@ -18,9 +18,7 @@ type Props = {
 
 const { title: customTitle, description, noindex } = Astro.props;
 
-const pathname = Astro.url.pathname
-  .replace(import.meta.env.BASE_URL, "")
-  .split("/")[0];
+const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, "").split("/")[0];
 
 const section = pathname
   ? `${SITE_TITLE} | ${pathname[0].toUpperCase() + pathname.slice(1)}`

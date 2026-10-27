@@ -52,7 +52,7 @@ export function CageModel({ deviceMotionRef }: Props) {
         args={[FLOOR_X * 1.25, FLOOR_Y, FLOOR_Z * 1.25]}
         restitution={0.1}
       />
-      {/*　天井　*/}
+      {/* 天井 */}
       <CuboidCollider
         position={[0, WALL_H * 2, 0]}
         args={[FLOOR_X * 1.25, FLOOR_Y, FLOOR_Z * 1.25]}

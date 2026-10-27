@@ -26,10 +26,7 @@ const { skillList } = Astro.props;
   <div class="mt-6 flex w-full flex-wrap gap-0.5 text-muted-foreground sm:mt-2">
     {skillList.map(({ skillGenre }, i) => (
       <div class="flex items-center">
-        <p
-          data-skill={i}
-          class="cursor-pointer px-0.5 leading-tight transition-all duration-300"
-        >
+        <p data-skill={i} class="cursor-pointer px-0.5 leading-tight transition-all duration-300">
           {skillGenre}
         </p>
         <p>{i < skillList.length - 1 && ","}</p>
