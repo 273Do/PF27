@@ -1,6 +1,6 @@
 ---
 import Label from "@/components/ui/label.astro";
-import type { WorksListItem } from "@/lib/fetch-contents";
+import type { WorksListItem } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -11,7 +11,8 @@ const { workList } = Astro.props;
 
 const seenYears = new Set<string>();
 
-const formatDate = (dateStr: string) => {
+const formatDate = (dateStr?: string) => {
+  if (!dateStr) return "";
   const d = dateStr.replace(/-/g, "").slice(0, 8);
   const yy = d.slice(2, 4);
   const mmdd = d.slice(4, 8);
@@ -31,7 +32,7 @@ const formatDate = (dateStr: string) => {
       >
         <p class={cn(work.pickup && "underline decoration-dotted", "text-primary")}>{work.title}</p>
         <div class="flex items-center justify-between gap-2 max-sm:mb-2.5 max-sm:leading-3">
-          <p>{work.tags.map((tag) => tag.tagName).join(", ")}</p>
+          <p>{work.tags?.map((tag) => tag.tagName).join(", ")}</p>
           <p class="w-14 shrink-0">{formatDate(work.releaseDate)}</p>
         </div>
       </a>

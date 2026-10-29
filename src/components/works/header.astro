@@ -1,13 +1,12 @@
 ---
 import Label from "@/components/ui/label.astro";
-import type { WorksObj } from "@/gen/types/microcms-schemas";
-import type { aroundWorksObj } from "@/pages/works/[slug].astro";
+import type { AroundWorksIds, WorksDetail } from "@/lib/types";
 
 import IconMarquee from "./icon-marquee.astro";
 
 type Props = {
-  detail: Omit<WorksObj, "article">;
-} & aroundWorksObj;
+  detail: WorksDetail;
+} & AroundWorksIds;
 
 const { detail, aroundWorksIds } = Astro.props;
 
@@ -39,10 +38,10 @@ const { prevId, nextId } = aroundWorksIds;
     <div class="flex flex-col justify-between">
       <div class="items-center justify-between sm:flex">
         <Label>{title}</Label>
-        <p class="text-muted-foreground">{releaseDate.replace(/-/g, "").slice(2, 8)}</p>
+        <p class="text-muted-foreground">{releaseDate?.replace(/-/g, "").slice(2, 8)}</p>
       </div>
       <div class="flex items-center justify-between text-muted-foreground">
-        <p>{tags.map((tag) => tag.tagName).join(", ")}</p>
+        <p>{tags?.map((tag) => tag.tagName).join(", ")}</p>
         <div class="flex">
           {appLink && (
             <a
@@ -82,7 +81,7 @@ const { prevId, nextId } = aroundWorksIds;
           )}
         </div>
       </div>
-      <IconMarquee techs={techs} />
+      {techs && techs.length > 0 && <IconMarquee techs={techs} />}
     </div>
   </div>
 </header>

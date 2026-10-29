@@ -1,9 +1,9 @@
 ---
 import Label from "@/components/ui/label.astro";
-import type { SkillObj } from "@/gen/types/microcms-schemas";
+import type { Skill } from "@/lib/types";
 
 type Props = {
-  skillList: SkillObj[];
+  skillList: Skill[];
 };
 
 const { skillList } = Astro.props;

@@ -22,17 +22,10 @@ const { slug } = Astro.params;
 
 const { prevId, nextId } = Astro.props;
 
-export type aroundWorksObj = {
-  aroundWorksIds: {
-    prevId?: string;
-    nextId?: string;
-  };
-};
-
 const aroundWorksIds = { prevId, nextId };
 
 const work = await getWorksDetail(slug);
-const title = `${work.detail.title} | ${SITE_TITLE}`;
+const title = work.detail.title ? `${work.detail.title} | ${SITE_TITLE}` : SITE_TITLE;
 ---
 
 <Layout title={title}>
