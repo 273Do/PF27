@@ -1,9 +1,9 @@
 ---
 import Label from "@/components/ui/label.astro";
-import type { SandboxObj } from "@/gen/types/microcms-schemas";
+import type { Sandbox } from "@/lib/types";
 
 type Props = {
-  sandboxList: SandboxObj[];
+  sandboxList: Sandbox[];
 };
 
 const { sandboxList } = Astro.props;
@@ -27,7 +27,7 @@ const { sandboxList } = Astro.props;
               rel="noopener noreferrer"
             >
               <p class="text-primary">{sandbox.title}</p>
-              <p>{sandbox.tags.map((tag) => tag.tagName).join(", ")}</p>
+              <p>{sandbox.tags?.map((tag) => tag.tagName).join(", ")}</p>
             </a>
             <a
               data-img-mobile={i}
@@ -36,7 +36,7 @@ const { sandboxList } = Astro.props;
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img src={sandbox.image.url} alt={sandbox.title} class="w-full sm:hidden" />
+              <img src={sandbox.image?.url} alt={sandbox.title} class="w-full sm:hidden" />
             </a>
           </div>
         ))}
@@ -45,10 +45,10 @@ const { sandboxList } = Astro.props;
     <div class="relative hidden w-1/2 invert sm:block">
       {sandboxList.map((sandbox, i) => (
         <div data-img={i} class="absolute inset-0 opacity-0 transition-opacity duration-300">
-          <img src={sandbox.image.url} alt={sandbox.title} class="w-full invert" />
+          <img src={sandbox.image?.url} alt={sandbox.title} class="w-full invert" />
           <div class="absolute inset-0 transition-opacity duration-300 [[data-sandbox]:hover_&]:opacity-0">
             <div class="dither-2xl w-full">
-              <img src={sandbox.image.url} alt={sandbox.title} class="w-full invert" />
+              <img src={sandbox.image?.url} alt={sandbox.title} class="w-full invert" />
             </div>
           </div>
         </div>

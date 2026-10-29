@@ -30,7 +30,7 @@ ${C.bgWhite}${C.black}${profile.name}${C.reset}
 ${C.gray}${profile.bio}${C.reset}
 
 ${C.bgWhite}${C.black}Links${C.reset}
-${C.lightGray}Mail${C.reset}${C.gray} : ${linkText(`mailto:${mail}`, mail)}${C.reset}
-${links.map((link) => `${C.lightGray}${link.title}${C.reset}${C.gray} : ${linkText(link.link, link.name)}${C.reset}`).join("\n")}
+${C.lightGray}Mail${C.reset}${C.gray} : ${linkText(`mailto:${mail}`, mail ?? "")}${C.reset}
+${links.map((link) => `${C.lightGray}${link.title}${C.reset}${C.gray} : ${linkText(link.link ?? "", link.name ?? "")}${C.reset}`).join("\n")}
 `;
 };

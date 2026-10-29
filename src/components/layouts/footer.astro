@@ -13,11 +13,14 @@ const { mail, links } = await getFooterProfile();
       <button id="banner-copy" class="cursor-copy">
         <Image src="/imgs/banner.png" width="200" height="40" alt="banner" />
       </button>
-      {banners?.map((banner) => (
-        <a href={banner.link} class="cursor-alias" target="_blank" rel="noopener noreferrer">
-          <Image src={banner.imageLink} width="200" height="40" alt={banner.link} />
-        </a>
-      ))}
+      {banners.map(
+        ({ link, imageLink }) =>
+          imageLink && (
+            <a href={link} class="cursor-alias" target="_blank" rel="noopener noreferrer">
+              <Image src={imageLink} width="200" height="40" alt={link ?? ""} />
+            </a>
+          ),
+      )}
     </div>
   </div>
   <div class="z-10 flex flex-col bg-background sm:items-end">

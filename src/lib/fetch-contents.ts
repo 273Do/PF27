@@ -1,45 +1,34 @@
 import type { MicroCMSQueries } from "microcms-js-sdk";
 
-import type {
-  BannersResponse,
-  ProfileObj,
-  ProfileResponse,
-  SandboxResponse,
-  WorksObj,
-  WorksResponse,
-} from "@/gen/types/microcms-schemas";
+import type { Banners, Profile, Sandbox, Works } from "@/gen/microcms-types";
+
+import type { FooterProfile, ProfileOnly, WorksDetail, WorksListItem } from "./types";
 
 import { client } from "./micro-cms";
 
-export type ProfileOnlyObj = Omit<ProfileObj, "mail" | "skills" | "links">;
-
 export const getProfile = async (queries?: MicroCMSQueries) => {
-  const res = await client.getObject<ProfileResponse>({
+  const res = await client.getObject<Profile>({
     endpoint: "profile",
     queries,
   });
 
-  const profile: ProfileOnlyObj = {
+  const profile: ProfileOnly = {
     name: res.name,
     bio: res.bio,
     description: res.description,
     icon: res.icon,
   };
 
-  return { profile, skills: res.skills };
+  return { profile, skills: res.skills ?? [] };
 };
 
 export const getFooterProfile = async (queries?: MicroCMSQueries) => {
-  const res = await client.getObject<Pick<ProfileResponse, "mail" | "links">>({
+  const res = await client.getObject<FooterProfile>({
     endpoint: "profile",
     queries,
   });
 
-  return { mail: res.mail, links: res.links };
-};
-
-export type WorksListItem = Pick<WorksResponse, "title" | "tags" | "releaseDate" | "pickup"> & {
-  id: string;
+  return { mail: res.mail, links: res.links ?? [] };
 };
 
 export const getWorksList = async (queries?: MicroCMSQueries) => {
@@ -55,13 +44,13 @@ export const getWorksList = async (queries?: MicroCMSQueries) => {
 };
 
 export const getWorksDetail = async (contentId: string, queries?: MicroCMSQueries) => {
-  const res = await client.getListDetail<WorksResponse>({
+  const res = await client.getListDetail<Works>({
     endpoint: "works",
     contentId,
     queries,
   });
 
-  const detail: Omit<WorksObj, "article"> = {
+  const detail: WorksDetail = {
     title: res.title,
     releaseDate: res.releaseDate,
     techs: res.techs,
@@ -76,7 +65,7 @@ export const getWorksDetail = async (contentId: string, queries?: MicroCMSQuerie
 };
 
 export const getSandboxList = async (queries?: MicroCMSQueries) => {
-  return await client.getList<SandboxResponse>({
+  return await client.getList<Sandbox>({
     endpoint: "sandbox",
     queries: {
       limit: 100,
@@ -86,7 +75,7 @@ export const getSandboxList = async (queries?: MicroCMSQueries) => {
 };
 
 export const getBannerList = async (queries?: MicroCMSQueries) => {
-  return await client.getList<BannersResponse>({
+  return await client.getList<Banners>({
     endpoint: "banners",
     queries: {
       limit: 100,
