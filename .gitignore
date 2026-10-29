@@ -25,9 +25,5 @@ pnpm-debug.log*
 
 .wrangler
 
-# generated types
-# TODO: GitHub Actions では 500 エラーとなるため生成したものをコミットしている
-# src/gen/
-
 # Affinty
 affinty/
