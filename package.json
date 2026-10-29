@@ -9,7 +9,7 @@
     "astro": "astro",
     "astro:check": "astro check",
     "prepare": "vp config",
-    "generate:types": "vpx tsx scripts/generate-types.ts",
+    "generate:types": "vpx microcms-typegen generate",
     "deploy": "wrangler deploy"
   },
   "dependencies": {
@@ -48,6 +48,7 @@
     "@commitlint/cli": "^21.1.0",
     "@commitlint/config-conventional": "^21.1.0",
     "@commitlint/types": "^21.2.0",
+    "microcms-typegen": "^1.0.0",
     "vite-plus": "catalog:",
     "wrangler": "^4.112.0"
   },
