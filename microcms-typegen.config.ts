@@ -7,7 +7,7 @@ export default {
       apiKey: process.env.MICROCMS_API_INFO_API_KEY,
       output: "./src/gen/microcms-types.ts",
       typeRules: {
-        trustReadFieldConstraints: false,
+        trustReadFieldConstraints: true,
       },
     },
   },
