@@ -29,8 +29,8 @@ type __MicroCMSTypegenBannersRead<Options extends __MicroCMSTypegenReadOptions =
   updatedAt: string;
   publishedAt?: string;
   revisedAt?: string;
-  link?: string | null;
-  imageLink?: string | null;
+  link: string;
+  imageLink: string;
 };
 
 export type Banners = __MicroCMSTypegenBannersRead<{}>;
@@ -51,8 +51,8 @@ type __MicroCMSTypegenProfileCustomFieldSkillRead<
   Options extends __MicroCMSTypegenReadOptions = {},
 > = {
   fieldId: "skill";
-  skillGenre?: string | null;
-  skills?: string | null;
+  skillGenre: string;
+  skills: string;
 };
 
 export type ProfileCustomFieldSkill = __MicroCMSTypegenProfileCustomFieldSkillRead<{}>;
@@ -73,9 +73,9 @@ type __MicroCMSTypegenProfileCustomFieldLinkRead<
   Options extends __MicroCMSTypegenReadOptions = {},
 > = {
   fieldId: "link";
-  title?: string | null;
-  link?: string | null;
-  name?: string | null;
+  title: string;
+  link: string;
+  name: string;
 };
 
 export type ProfileCustomFieldLink = __MicroCMSTypegenProfileCustomFieldLinkRead<{}>;
@@ -99,13 +99,19 @@ type __MicroCMSTypegenProfileRead<Options extends __MicroCMSTypegenReadOptions =
   updatedAt: string;
   publishedAt?: string;
   revisedAt?: string;
-  name?: string | null;
-  bio?: string | null;
-  description?: string | null;
-  icon?: MicroCMSImage;
-  mail?: string | null;
-  skills: __MicroCMSTypegenProfileCustomFieldSkillRead<Options>[] | null;
-  links: __MicroCMSTypegenProfileCustomFieldLinkRead<Options>[] | null;
+  name: string;
+  bio: string;
+  description: string;
+  icon: MicroCMSImage;
+  mail: string;
+  skills: [
+    __MicroCMSTypegenProfileCustomFieldSkillRead<Options>,
+    ...__MicroCMSTypegenProfileCustomFieldSkillRead<Options>[],
+  ];
+  links: [
+    __MicroCMSTypegenProfileCustomFieldLinkRead<Options>,
+    ...__MicroCMSTypegenProfileCustomFieldLinkRead<Options>[],
+  ];
 };
 
 export type Profile = __MicroCMSTypegenProfileRead<{}>;
@@ -168,11 +174,17 @@ type __MicroCMSTypegenWorksRead<Options extends __MicroCMSTypegenReadOptions = {
   updatedAt: string;
   publishedAt?: string;
   revisedAt?: string;
-  title?: string | null;
-  article?: string | null;
-  releaseDate?: string;
-  techs: __MicroCMSTypegenWorksCustomFieldTechRead<Options>[] | null;
-  tags: __MicroCMSTypegenWorksCustomFieldTagRead<Options>[] | null;
+  title: string;
+  article: string;
+  releaseDate: string;
+  techs: [
+    __MicroCMSTypegenWorksCustomFieldTechRead<Options>,
+    ...__MicroCMSTypegenWorksCustomFieldTechRead<Options>[],
+  ];
+  tags: [
+    __MicroCMSTypegenWorksCustomFieldTagRead<Options>,
+    ...__MicroCMSTypegenWorksCustomFieldTagRead<Options>[],
+  ];
   githubLink?: string | null;
   appLink?: string | null;
   otherLink?: string | null;
@@ -222,7 +234,7 @@ type __MicroCMSTypegenWorksUpdate = {
 type __MicroCMSTypegenSandboxCustomFieldTagRead<Options extends __MicroCMSTypegenReadOptions = {}> =
   {
     fieldId: "tag";
-    tagName?: string | null;
+    tagName: string;
   };
 
 export type SandboxCustomFieldTag = __MicroCMSTypegenSandboxCustomFieldTagRead<{}>;
@@ -243,10 +255,13 @@ type __MicroCMSTypegenSandboxRead<Options extends __MicroCMSTypegenReadOptions =
   updatedAt: string;
   publishedAt?: string;
   revisedAt?: string;
-  title?: string | null;
-  image?: MicroCMSImage;
-  tags: __MicroCMSTypegenSandboxCustomFieldTagRead<Options>[] | null;
-  link?: string | null;
+  title: string;
+  image: MicroCMSImage;
+  tags: [
+    __MicroCMSTypegenSandboxCustomFieldTagRead<Options>,
+    ...__MicroCMSTypegenSandboxCustomFieldTagRead<Options>[],
+  ];
+  link: string;
 };
 
 export type Sandbox = __MicroCMSTypegenSandboxRead<{}>;

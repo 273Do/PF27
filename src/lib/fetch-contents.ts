@@ -19,7 +19,7 @@ export const getProfile = async (queries?: MicroCMSQueries) => {
     icon: res.icon,
   };
 
-  return { profile, skills: res.skills ?? [] };
+  return { profile, skills: res.skills };
 };
 
 export const getFooterProfile = async (queries?: MicroCMSQueries) => {
@@ -28,7 +28,7 @@ export const getFooterProfile = async (queries?: MicroCMSQueries) => {
     queries,
   });
 
-  return { mail: res.mail, links: res.links ?? [] };
+  return { mail: res.mail, links: res.links };
 };
 
 export const getWorksList = async (queries?: MicroCMSQueries) => {
