@@ -20,7 +20,7 @@ export function LogoAnimation() {
   const showCanvas = !isMobile || permissionGranted;
 
   return (
-    <div className="relative my-4 h-72 w-full border-[0.1px] border-dashed">
+    <div data-webgl-root className="relative my-4 h-72 w-full border-[0.1px] border-dashed">
       {!showCanvas ? (
         <div className="flex h-full items-center justify-center">
           <button
@@ -45,6 +45,9 @@ export function LogoAnimation() {
             alpha: true,
           }}
           scene={{ background: null }}
+          onCreated={({ gl }) => {
+            gl.domElement.dataset.glReady = "true";
+          }}
         >
           {DEBUG_MODE && (
             <>
