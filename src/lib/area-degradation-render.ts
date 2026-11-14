@@ -99,6 +99,11 @@ const jitter = (base: number, range: number): number => {
   return base + (Math.random() - 0.5) * 2 * range;
 };
 
+const isPendingWebGLCanvas = (el: Element): boolean =>
+  el instanceof HTMLCanvasElement &&
+  el.closest("[data-webgl-root]") !== null &&
+  el.dataset.glReady !== "true";
+
 export const captureScene = async (ignoreElement: Element | null): Promise<HTMLCanvasElement> => {
   const W = window.innerWidth;
   const H = window.innerHeight;
@@ -114,7 +119,7 @@ export const captureScene = async (ignoreElement: Element | null): Promise<HTMLC
     y: window.scrollY,
     logging: false,
     useCORS: true,
-    ignoreElements: (el) => el === ignoreElement,
+    ignoreElements: (el) => el === ignoreElement || isPendingWebGLCanvas(el),
   });
 };
 
