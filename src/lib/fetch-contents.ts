@@ -1,8 +1,7 @@
 import type { MicroCMSQueries } from "microcms-js-sdk";
 
 import type { Banners, Profile, Sandbox, Works } from "@/gen/microcms-types";
-
-import type { FooterProfile, ProfileOnly, WorksDetail, WorksListItem } from "./types";
+import type { FooterProfile, ProfileOnly, WorksDetail, WorksListItem } from "@/types/contents";
 
 import { client } from "./micro-cms";
 
