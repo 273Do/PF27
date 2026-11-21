@@ -3,7 +3,6 @@ import Layout from "@/components/layouts/layout.astro";
 import Separator from "@/components/ui/separator.astro";
 import Detail from "@/components/works/detail.astro";
 import Header from "@/components/works/header.astro";
-import { SITE_TITLE } from "@/constants/metadata";
 import { getWorksList, getWorksDetail } from "@/lib/fetch-contents";
 
 export const getStaticPaths = async () => {
@@ -25,11 +24,12 @@ const { prevId, nextId } = Astro.props;
 const aroundWorksIds = { prevId, nextId };
 
 const work = await getWorksDetail(slug);
-const title = work.detail.title ? `${work.detail.title} | ${SITE_TITLE}` : SITE_TITLE;
+
+const { detail, article } = work;
 ---
 
-<Layout title={title}>
-  <Header detail={work.detail} aroundWorksIds={aroundWorksIds} />
+<Layout title={detail.title}>
+  <Header detail={detail} aroundWorksIds={aroundWorksIds} />
   <Separator />
-  <Detail article={work.article} />
+  <Detail article={article} />
 </Layout>
