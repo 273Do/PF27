@@ -16,10 +16,12 @@ const [{ profile, skills }, { contents: works }, { contents: sandbox }] = fetchD
 ---
 
 <Layout>
-  <LogoAnimation client:idle />
-  <Profile profile={profile} />
-  <Separator />
-  <Skills skillList={skills} />
-  <Works workList={works} />
-  <Sandbox sandboxList={sandbox} />
+  <div class="text-muted-foreground">
+    <LogoAnimation client:idle />
+    <Profile profile={profile} />
+    <Separator />
+    <Skills skillList={skills} />
+    <Works workList={works} />
+    <Sandbox sandboxList={sandbox} />
+  </div>
 </Layout>

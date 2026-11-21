@@ -23,10 +23,7 @@ export function LogoAnimation() {
     <div data-webgl-root className="relative my-4 h-72 w-full border-[0.1px] border-dashed">
       {!showCanvas ? (
         <div className="flex h-full items-center justify-center">
-          <button
-            onClick={requestPermission}
-            className="cursor-pointer text-sm text-muted-foreground"
-          >
+          <button onClick={requestPermission} className="cursor-pointer text-sm">
             <div className="flex flex-col items-center">
               <div className="flex items-center gap-1">
                 <p className="w-fit bg-primary leading-tight text-secondary">CLICK HERE</p>

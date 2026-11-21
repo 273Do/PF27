@@ -12,11 +12,11 @@ const { sandboxList } = Astro.props;
 <div class="mt-6 flex flex-col gap-2">
   <div class="items-center justify-between sm:flex">
     <Label>Sandbox</Label>
-    <p class="text-muted-foreground">Play Ground, R&D Collection, Experiments</p>
+    <p>Play Ground, R&D Collection, Experiments</p>
   </div>
   <div data-sandbox class="flex w-full items-start gap-4">
     <div class="w-full sm:w-1/2">
-      <div class="w-full text-muted-foreground">
+      <div class="w-full">
         {sandboxList.map((sandbox, i) => (
           <div>
             <a
