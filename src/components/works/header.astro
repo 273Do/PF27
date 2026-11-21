@@ -1,6 +1,6 @@
 ---
 import Label from "@/components/ui/label.astro";
-import type { AroundWorksIds, WorksDetail } from "@/lib/types";
+import type { AroundWorksIds, WorksDetail } from "@/types/contents";
 
 import IconMarquee from "./icon-marquee.astro";
 
@@ -19,7 +19,6 @@ const { prevId, nextId } = aroundWorksIds;
   <div class="flex flex-col gap-3">
     <div class="flex items-center justify-between">
       <a href="/" class="w-fit">
-        {" "}
         &#x2190; Back
       </a>
       <div class="flex gap-4">

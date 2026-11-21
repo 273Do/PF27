@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 
 import Label from "@/components/ui/label.astro";
-import type { ProfileOnly } from "@/lib/types";
+import type { ProfileOnly } from "@/types/contents";
 
 type Props = { profile: ProfileOnly };
 
@@ -16,8 +16,8 @@ const { name, bio, description, icon } = profile;
     <Image src={icon.url} width={75} height={75} alt={name} class="z-10 rounded-full" />
     <div>
       <Label>{name}</Label>
-      <p class="text-muted-foreground">{bio}</p>
+      <p>{bio}</p>
     </div>
   </div>
-  <p class="text-muted-foreground">{description}</p>
+  <p>{description}</p>
 </div>

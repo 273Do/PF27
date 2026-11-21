@@ -106,3 +106,23 @@
 #md > h3 + * {
   @apply mt-6;
 }
+
+@media print {
+  @page {
+    margin: 15mm;
+  }
+
+  body:has(#print) *:not(:has(#print), #print, #print *) {
+    display: none !important;
+  }
+
+  body:has(#print),
+  body:has(#print) *:has(#print) {
+    @apply m-0 block w-full max-w-none p-0;
+  }
+
+  #print,
+  #print * {
+    print-color-adjust: exact;
+  }
+}

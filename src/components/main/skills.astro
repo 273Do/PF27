@@ -1,6 +1,6 @@
 ---
 import Label from "@/components/ui/label.astro";
-import type { Skill } from "@/lib/types";
+import type { Skill } from "@/types/contents";
 
 type Props = {
   skillList: Skill[];
@@ -16,14 +16,14 @@ const { skillList } = Astro.props;
       {skillList.map(({ skills }) => (
         <p
           data-detail
-          class="whitespace-wrap absolute left-0 text-muted-foreground opacity-0 transition-opacity duration-300 sm:right-0 sm:left-auto"
+          class="whitespace-wrap absolute left-0 opacity-0 transition-opacity duration-300 sm:right-0 sm:left-auto"
         >
           {skills}
         </p>
       ))}
     </div>
   </div>
-  <div class="mt-6 flex w-full flex-wrap gap-0.5 text-muted-foreground sm:mt-2">
+  <div class="mt-6 flex w-full flex-wrap gap-0.5 sm:mt-2">
     {skillList.map(({ skillGenre }, i) => (
       <div class="flex items-center">
         <p data-skill={i} class="cursor-pointer px-0.5 leading-tight transition-all duration-300">

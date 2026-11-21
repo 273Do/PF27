@@ -1,0 +1,83 @@
+---
+import Layout from "@/components/layouts/layout.astro";
+import Label from "@/components/ui/label.astro";
+import Separator from "@/components/ui/separator.astro";
+import { getResume } from "@/lib/fetch-contents";
+import type { DateString, Period } from "@/types/resume";
+
+const toYYMMDD = (date: DateString) => date.replace(/-/g, "").slice(2, 8);
+
+const toYYMM = (date: DateString) => toYYMMDD(date).slice(0, 4);
+
+const formatPeriod = ({ start, end }: Period) => {
+  const startYYMM = toYYMM(start);
+  if (!end) return `${startYYMM}-現在`;
+  const endYYMM = toYYMM(end);
+  const isSameYear = startYYMM.slice(0, 2) === endYYMM.slice(0, 2);
+  return `${startYYMM}-${isSameYear ? endYYMM.slice(2) : endYYMM}`;
+};
+
+const { title, companies, updatedAt } = await getResume();
+---
+
+<Layout title={title} disabledAreaDegradation>
+  <div>
+    <header>
+      <div class="flex flex-col">
+        <div class="flex items-center justify-between">
+          <a href="/" class="w-fit">
+            &#x2190; Back
+          </a>
+          <button class="w-fit cursor-copy" onclick="window.print();">
+            Export
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div id="print" class="mt-3">
+      <div class="flex flex-col justify-between">
+        <div class="flex items-center justify-between">
+          <Label>{title}</Label>
+          <p class="text-muted-foreground">{toYYMMDD(updatedAt)}更新</p>
+        </div>
+      </div>
+
+      {companies.map(({ name: companyName, description: companyDescription, projects }) => (
+        <>
+          <Separator />
+          <section class="flex flex-col gap-6">
+            <div class="flex items-center justify-between text-muted-foreground">
+              <p class="text-primary">{companyName}</p>
+              <p>{companyDescription}</p>
+            </div>
+            <div class="flex flex-col gap-8">
+              {projects.map(({ name, period, roles, techs, description, achievements }) => (
+                <section class="flex flex-col gap-3">
+                  <header class="flex flex-col justify-between">
+                    <div class="items-center justify-between sm:flex">
+                      <Label>{name}</Label>
+                      <p class="shrink-0 text-muted-foreground">{formatPeriod(period)}</p>
+                    </div>
+                    <div class="flex flex-col text-muted-foreground">
+                      <p class="text-primary">{roles.join(", ")}</p>
+                      <p>{techs.join(", ")}</p>
+                    </div>
+                  </header>
+                  <p class="leading-snug">{description}</p>
+                  {achievements.length > 0 && (
+                    <ul class="list-disc space-y-1 pl-6">
+                      {achievements.map((achievement) => (
+                        <li class="leading-snug">{achievement}</li>
+                      ))}
+                    </ul>
+                  )}
+                </section>
+              ))}
+            </div>
+          </section>
+        </>
+      ))}
+    </div>
+  </div>
+</Layout>

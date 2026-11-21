@@ -1,10 +1,16 @@
 import type { MicroCMSQueries } from "microcms-js-sdk";
 
 import type { Banners, Profile, Sandbox, Works } from "@/gen/microcms-types";
-
-import type { FooterProfile, ProfileOnly, WorksDetail, WorksListItem } from "./types";
+import type {
+  FooterProfile,
+  ProfileOnly,
+  ResumeText,
+  WorksDetail,
+  WorksListItem,
+} from "@/types/contents";
 
 import { client } from "./micro-cms";
+import { parseResume } from "./parse-resume";
 
 export const getProfile = async (queries?: MicroCMSQueries) => {
   const res = await client.getObject<Profile>({
@@ -31,6 +37,17 @@ export const getFooterProfile = async (queries?: MicroCMSQueries) => {
   return { mail: res.mail, links: res.links };
 };
 
+export const getResume = async (queries?: MicroCMSQueries) => {
+  const res = await client.getObject<ResumeText>({
+    endpoint: "profile",
+    queries: {
+      fields: ["resume"],
+      ...queries,
+    },
+  });
+
+  return parseResume(res.resume);
+};
 export const getWorksList = async (queries?: MicroCMSQueries) => {
   return await client.getList<WorksListItem>({
     endpoint: "works",

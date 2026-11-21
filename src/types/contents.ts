@@ -15,6 +15,8 @@ export type ProfileOnly = Pick<Profile, "name" | "bio" | "description" | "icon">
 
 export type FooterProfile = Pick<Profile, "mail" | "links">;
 
+export type ResumeText = Pick<Profile, "resume">;
+
 export type WorksListItem = Pick<Works, "id" | "title" | "tags" | "releaseDate" | "pickup">;
 
 export type WorksDetail = Pick<

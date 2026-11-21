@@ -112,6 +112,7 @@ type __MicroCMSTypegenProfileRead<Options extends __MicroCMSTypegenReadOptions =
     __MicroCMSTypegenProfileCustomFieldLinkRead<Options>,
     ...__MicroCMSTypegenProfileCustomFieldLinkRead<Options>[],
   ];
+  resume: string;
 };
 
 export type Profile = __MicroCMSTypegenProfileRead<{}>;
@@ -131,6 +132,7 @@ type __MicroCMSTypegenProfileUpdate = {
     __MicroCMSTypegenProfileCustomFieldLinkUpdate,
     ...__MicroCMSTypegenProfileCustomFieldLinkUpdate[],
   ];
+  resume?: string;
 };
 
 type __MicroCMSTypegenWorksCustomFieldTechRead<Options extends __MicroCMSTypegenReadOptions = {}> =
@@ -329,7 +331,8 @@ export type MainServiceSchema = {
       | "icon"
       | "mail"
       | "skills"
-      | "links";
+      | "links"
+      | "resume";
     update: __MicroCMSTypegenExpand<__MicroCMSTypegenProfileUpdate>;
   };
   works: {
