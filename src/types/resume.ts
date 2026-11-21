@@ -1,27 +1,35 @@
-export type DateString = `${number}-${number}-${number}`;
+import { z } from "astro/zod";
 
-export type Period = {
-  start: DateString;
-  end?: DateString;
-};
+export const DateStringSchema = z.iso.date();
 
-export type Project = {
-  name: string;
-  period: Period;
-  roles: string[];
-  techs: string[];
-  description: string;
-  achievements: string[];
-};
+export const PeriodSchema = z.object({
+  start: DateStringSchema,
+  end: z.union([z.literal("").transform(() => undefined), DateStringSchema]).optional(),
+});
 
-export type Company = {
-  name: string;
-  description: string;
-  projects: Project[];
-};
+export const ProjectSchema = z.object({
+  name: z.string(),
+  period: PeriodSchema,
+  roles: z.array(z.string()),
+  techs: z.array(z.string()),
+  description: z.string(),
+  achievements: z.array(z.string()),
+});
 
-export type Resume = {
-  title: string;
-  companies: Company[];
-  updatedAt: DateString;
-};
+export const CompanySchema = z.object({
+  name: z.string(),
+  description: z.string(),
+  projects: z.array(ProjectSchema),
+});
+
+export const ResumeSchema = z.object({
+  title: z.string(),
+  companies: z.array(CompanySchema),
+  updatedAt: DateStringSchema,
+});
+
+export type DateString = z.infer<typeof DateStringSchema>;
+export type Period = z.infer<typeof PeriodSchema>;
+export type Project = z.infer<typeof ProjectSchema>;
+export type Company = z.infer<typeof CompanySchema>;
+export type Resume = z.infer<typeof ResumeSchema>;
