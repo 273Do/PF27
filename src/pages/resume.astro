@@ -2,12 +2,8 @@
 import Layout from "@/components/layouts/layout.astro";
 import Label from "@/components/ui/label.astro";
 import Separator from "@/components/ui/separator.astro";
-import { parseResume } from "@/lib/parse-resume";
+import { getResume } from "@/lib/fetch-contents";
 import type { DateString, Period } from "@/types/resume";
-
-import resumeText from "../../dummy/resume.txt?raw";
-
-const { title, companies, updatedAt } = parseResume(resumeText);
 
 const toYYMMDD = (date: DateString) => date.replace(/-/g, "").slice(2, 8);
 
@@ -20,6 +16,8 @@ const formatPeriod = ({ start, end }: Period) => {
   const isSameYear = startYYMM.slice(0, 2) === endYYMM.slice(0, 2);
   return `${startYYMM}-${isSameYear ? endYYMM.slice(2) : endYYMM}`;
 };
+
+const { title, companies, updatedAt } = await getResume();
 ---
 
 <Layout title={title} disabledAreaDegradation>
