@@ -24,7 +24,7 @@ const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, "").split(
 const section = pathname
   ? `${SITE_TITLE} | ${pathname[0].toUpperCase() + pathname.slice(1)}`
   : SITE_TITLE;
-const title = customTitle || section;
+const title = customTitle ? `${customTitle} | ${SITE_TITLE}` : section;
 ---
 
 <html lang="ja">
