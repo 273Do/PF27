@@ -14,9 +14,10 @@ type Props = {
   title?: string;
   description?: string;
   noindex?: boolean;
+  disabledAreaDegradation?: boolean;
 };
 
-const { title: customTitle, description, noindex } = Astro.props;
+const { title: customTitle, description, noindex, disabledAreaDegradation = false } = Astro.props;
 
 const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, "").split("/")[0];
 
@@ -33,7 +34,7 @@ const title = customTitle || section;
     <ClientRouter />
   </head>
   <body class="my-25 flex w-full justify-center bg-background font-serif antialiased selection:bg-secondary-foreground selection:text-primary-foreground">
-    <AreaDegradationCanvas client:idle />
+    <AreaDegradationCanvas disabled={disabledAreaDegradation} client:idle />
     <div class="w-full max-w-2xl px-4 sm:mx-4 sm:w-auto sm:px-0">
       <slot />
       <Separator />
